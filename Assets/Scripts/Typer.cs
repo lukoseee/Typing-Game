@@ -16,6 +16,7 @@ public class Typer : MonoBehaviour
     public Color remainingColor = Color.black;
     public Color failedColor = Color.red;
     public WordBank wordBank = null;
+    public TimerBar timerBar = null;
     
     private string currentSentence = null;
     private int typedCount = 0;
@@ -52,7 +53,10 @@ public class Typer : MonoBehaviour
     }
 
     private void checkInput()
-    {
+    {       
+        if (gameController.getFailed())
+            return;
+
         if (Input.anyKeyDown)
         {
             string keyPressed = Input.inputString;
@@ -69,7 +73,11 @@ public class Typer : MonoBehaviour
         {
             typedCount++;
             Debug.Log($"Typed count: {typedCount}");
-
+            
+            if(isWordComplete()){
+                timerBar.ResetTimer();
+            }
+            
             if (isSentenceComplete()){
                 Debug.Log("Sentence complete!");
                 gameController.loadNextSentence();
@@ -80,6 +88,7 @@ public class Typer : MonoBehaviour
         } else 
         {
             gameController.setFailed();
+            timerBar.stopTimer();
             StartCoroutine(ShakeText());
             updateDisplay();
         }
@@ -109,5 +118,13 @@ public class Typer : MonoBehaviour
         }
 
         wordOutput.transform.localPosition = originalPosition;
+    }
+
+    private bool isWordComplete()
+    {   
+        if (typedCount >= currentSentence.Length)
+            return true;
+
+        return currentSentence[typedCount] == ' ';
     }
 }

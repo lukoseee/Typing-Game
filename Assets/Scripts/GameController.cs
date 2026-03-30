@@ -4,6 +4,7 @@ public class GameController : MonoBehaviour
 {
     public Typer typer = null;
     public WordBank wordBank = null;
+    public TimerBar timerBar = null;
 
     private bool hasFailed = false;
 
@@ -13,11 +14,13 @@ public class GameController : MonoBehaviour
         hasFailed = false;
         wordBank.resetSentences();
         loadNextSentence();
+        timerBar.ResetTimer();
         Debug.Log("hasFailed: " + hasFailed);
     }
 
     private void Update()
-    {
+    {   
+        checkTimer();
         if (hasFailed == true)
         {
             checkRestart();
@@ -48,6 +51,14 @@ public class GameController : MonoBehaviour
         {   
             Debug.Log("Restarting game...");
             Start();
+        }
+    }
+
+    private void checkTimer()
+    {
+        if (timerBar.isTimerExpired())
+        {
+            setFailed();
         }
     }
 }
