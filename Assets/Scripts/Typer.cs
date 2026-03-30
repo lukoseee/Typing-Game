@@ -85,6 +85,7 @@ public class Typer : MonoBehaviour
             else{
                 updateDisplay();
             }
+            
         } else 
         {
             gameController.setFailed();

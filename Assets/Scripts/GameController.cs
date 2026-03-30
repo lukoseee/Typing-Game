@@ -1,21 +1,42 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
 public class GameController : MonoBehaviour
 {
     public Typer typer = null;
     public WordBank wordBank = null;
     public TimerBar timerBar = null;
+    public List<LevelData> levels = new List<LevelData>();
 
     private bool hasFailed = false;
+    private int currentLevelIndex = 0;
+
+    private void StartLevel(int index){
+        LevelData level = levels[index];
+
+        wordBank.setWords(level.sentences);
+        timerBar.duration = level.timeLimit;
+    }
+
+    private void NextLevel(){
+        currentLevelIndex++;
+
+        Debug.Log($"Loading level {currentLevelIndex}...");
+        if (currentLevelIndex >= levels.Count)
+        {
+            Debug.Log("Game Complete!");
+            return;
+        }
+
+        StartLevel(currentLevelIndex);
+
+    }
 
     private void Start()
     {   
-        Debug.Log("Starting game...");
-        hasFailed = false;
-        wordBank.resetSentences();
-        loadNextSentence();
-        timerBar.ResetTimer();
-        Debug.Log("hasFailed: " + hasFailed);
+        currentLevelIndex = 0;
+        RestartLevel();
     }
 
     private void Update()
@@ -28,7 +49,12 @@ public class GameController : MonoBehaviour
     }
 
     public void loadNextSentence()
-    {
+    {   
+        if (wordBank.isComplete())
+        {   
+            Debug.Log("Level Complete!");
+            NextLevel();
+        }
         string sentence = wordBank.getWord();
         typer.setCurrentSentence(sentence);
     }
@@ -50,7 +76,7 @@ public class GameController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {   
             Debug.Log("Restarting game...");
-            Start();
+            RestartLevel();
         }
     }
 
@@ -60,5 +86,16 @@ public class GameController : MonoBehaviour
         {
             setFailed();
         }
+    }
+
+    public void RestartLevel()
+    {
+        Debug.Log("Restarting current level...");
+
+        hasFailed = false;
+
+        StartLevel(currentLevelIndex);   
+        loadNextSentence();              
+        timerBar.ResetTimer();
     }
 }

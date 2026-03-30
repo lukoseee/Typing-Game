@@ -4,19 +4,12 @@ using UnityEngine;
 
 public class WordBank : MonoBehaviour
 {   
-    public List<string> sentences = new List<string>();
-
     private List<string> workingSentences = new List<string>();
 
-    private void Awake(){
-
-        workingSentences.AddRange(sentences);
-    }
-
-    public void resetSentences(){
-
+    public void setWords(string[] newSentences)
+    {   
         workingSentences.Clear();
-        workingSentences.AddRange(sentences);
+        workingSentences.AddRange(newSentences);
     }
 
     public string getWord(){
@@ -31,6 +24,11 @@ public class WordBank : MonoBehaviour
         
         return newWord;
 
+    }
+    
+    public bool isComplete()
+    {
+        return workingSentences.Count == 0;
     }
 
 }
