@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -8,6 +9,8 @@ public class GameController : MonoBehaviour
     public WordBank wordBank = null;
     public TimerBar timerBar = null;
     public List<LevelData> levels = new List<LevelData>();
+    public Text levelDisplay = null;
+    public CandleController candleController = null;
 
     private bool hasFailed = false;
     private int currentLevelIndex = 0;
@@ -16,7 +19,13 @@ public class GameController : MonoBehaviour
         LevelData level = levels[index];
 
         wordBank.setWords(level.sentences);
+
+        candleController.SpawnCandles(wordBank.wordCount());
+
+        candleController.ResetCandles();
+        
         timerBar.duration = level.timeLimit;
+        levelDisplay.text = $"{index + 1}";
     }
 
     private void NextLevel(){

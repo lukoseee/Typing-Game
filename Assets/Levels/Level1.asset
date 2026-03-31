@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level1
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   sentences:
-  - 'the cat '
-  - 'sat on '
+  - the cat
+  - sat on
   - the mat
-  timeLimit: 5
+  timeLimit: 10000000

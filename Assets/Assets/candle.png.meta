@@ -1,0 +1,560 @@
+fileFormatVersion: 2
+guid: 604adb3b3f7ae81639f50dddad6f11cd
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1974983472812535418
+    second: pixellab-a-candle-no-candle-holder----c-1774972490974_0
+  - first:
+      213: -5252773243996278595
+    second: pixellab-a-candle-no-candle-holder----c-1774972490974_1
+  - first:
+      213: 298386600622256838
+    second: pixellab-a-candle-no-candle-holder----c-1774972490974_2
+  - first:
+      213: 4494041624392071025
+    second: pixellab-a-candle-no-candle-holder----c-1774972490974_3
+  - first:
+      213: -5362757033734443434
+    second: pixellab-a-candle-no-candle-holder----c-1774972490974_4
+  - first:
+      213: -7571233040983092587
+    second: pixellab-a-candle-no-candle-holder----c-1774972490974_5
+  - first:
+      213: -8994525273517362265
+    second: pixellab-a-candle-no-candle-holder----c-1774972490974_6
+  - first:
+      213: 273940637874300586
+    second: pixellab-a-candle-no-candle-holder----c-1774972490974_7
+  - first:
+      213: -1428178531161407459
+    second: pixellab-a-candle-no-candle-holder----c-1774972490974_8
+  - first:
+      213: 2024699932726678484
+    second: pixellab-a-candle-no-candle-holder----c-1774972490974_9
+  - first:
+      213: -2334755314294095110
+    second: pixellab-a-candle-no-candle-holder----c-1774972490974_10
+  - first:
+      213: -2588365986451964355
+    second: pixellab-a-candle-no-candle-holder----c-1774972490974_11
+  - first:
+      213: -5547950887819903964
+    second: pixellab-a-candle-no-candle-holder----c-1774972490974_12
+  - first:
+      213: 1069418005356616889
+    second: pixellab-a-candle-no-candle-holder----c-1774972490974_13
+  - first:
+      213: 3833678568504557819
+    second: pixellab-a-candle-no-candle-holder----c-1774972490974_14
+  - first:
+      213: -2042829787956813818
+    second: pixellab-a-candle-no-candle-holder----c-1774972490974_15
+  - first:
+      213: 854848603726022466
+    second: pixellab-a-candle-no-candle-holder----c-1774972490974_16
+  - first:
+      213: 510706176430813735
+    second: pixellab-a-candle-no-candle-holder----c-1774972490974_17
+  - first:
+      213: -1434722459653548761
+    second: pixellab-a-candle-no-candle-holder----c-1774972490974_18
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 64
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: candle_0
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 194
+        width: 26
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 491e25857440bb8e2980d08ba60e9fdc
+      internalID: -307081317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candle_1
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 194
+        width: 26
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 006e862063341c234a69a52e5b0c2a0e
+      internalID: -1349637401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candle_2
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 194
+        width: 26
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7426fb5a53d5f5d9c83128ba1a9c3dd5
+      internalID: 20482227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candle_3
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 194
+        width: 27
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 605302302a671f46383105fd9c75d0c1
+      internalID: 1938751802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candle_4
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 130
+        width: 26
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b49d78e1f58fc21f2b729bea33e9c78d
+      internalID: -745033783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candle_5
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 130
+        width: 28
+        height: 61
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f94118fba8b96e63a28e8907e80f353
+      internalID: 2106942893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candle_6
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 130
+        width: 27
+        height: 59
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f49a31746edec946c82e87914f9adc4d
+      internalID: -1732214723
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candle_7
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 130
+        width: 26
+        height: 60
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3fb3e4e01041e3d88afe88354ae63bae
+      internalID: -347758246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candle_8
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 66
+        width: 27
+        height: 51
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a14d559411deb8e4829b5cf5e50ced8
+      internalID: 1225674319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candle_9
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 66
+        width: 27
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba513c2f69c4becedbc240cc57bda212
+      internalID: -645610739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candle_12
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 66
+        width: 26
+        height: 57
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6ed717f99e8d4700865c511b9821bf8
+      internalID: 498366717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candle_13
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 66
+        width: 28
+        height: 63
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08b5c16cc9c3e4da3a5975e520b94a85
+      internalID: -1313720063
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candle_14
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 2
+        width: 26
+        height: 63
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dcb004c75027630ada11e2241eeee2e3
+      internalID: 1204287868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candle_16
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 2
+        width: 27
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9e22bc061255d697b78810964a329a5
+      internalID: -636042105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candle_17
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 2
+        width: 27
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64939c7cb4680bbf5b785cfa188de446
+      internalID: 1380611877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: candle_18
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 2
+        width: 26
+        height: 61
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 74ed3caea8f9e3597be51461ea609d40
+      internalID: 2037958604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 999a7b92a491516628629898f7a0207b
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      candle_0: -307081317
+      candle_1: -1349637401
+      candle_10: 604415634
+      candle_11: 426456110
+      candle_12: 498366717
+      candle_13: -1313720063
+      candle_14: 1204287868
+      candle_15: 38719200
+      candle_16: -636042105
+      candle_17: 1380611877
+      candle_18: 2037958604
+      candle_2: 20482227
+      candle_3: 1938751802
+      candle_4: -745033783
+      candle_5: 2106942893
+      candle_6: -1732214723
+      candle_7: -347758246
+      candle_8: 1225674319
+      candle_9: -645610739
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

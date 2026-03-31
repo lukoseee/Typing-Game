@@ -17,6 +17,7 @@ public class Typer : MonoBehaviour
     public Color failedColor = Color.red;
     public WordBank wordBank = null;
     public TimerBar timerBar = null;
+    public CandleController candleController = null;
     
     private string currentSentence = null;
     private int typedCount = 0;
@@ -33,7 +34,6 @@ public class Typer : MonoBehaviour
 
     public void setCurrentSentence(string sentence)
     {
-        Debug.Log($"Setting current sentence: {sentence}");
         currentSentence = sentence;
         typedCount = 0;
         updateDisplay();
@@ -72,23 +72,23 @@ public class Typer : MonoBehaviour
         if (isCorrectLetter(letter))
         {
             typedCount++;
-            Debug.Log($"Typed count: {typedCount}");
             
             if(isWordComplete()){
                 timerBar.ResetTimer();
+                candleController.lightNextCandle();
             }
             
             if (isSentenceComplete()){
-                Debug.Log("Sentence complete!");
                 gameController.loadNextSentence();
             }
             else{
                 updateDisplay();
             }
-            
+
         } else 
         {
             gameController.setFailed();
+
             timerBar.stopTimer();
             StartCoroutine(ShakeText());
             updateDisplay();

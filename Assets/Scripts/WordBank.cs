@@ -29,6 +29,18 @@ public class WordBank : MonoBehaviour
     public bool isComplete()
     {
         return workingSentences.Count == 0;
+    }   
+
+    public int wordCount(){
+        
+        int counter = 0;
+
+        foreach(string s in workingSentences){
+            string[] words = s.Split(' ', '\t', '\n');
+            counter += words.Length;
+        }
+
+        return counter;
     }
 
 }
