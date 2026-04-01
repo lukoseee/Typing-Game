@@ -16,4 +16,4 @@ MonoBehaviour:
   - the cat
   - sat on
   - the mat
-  timeLimit: 10000000
+  timeLimit: 4

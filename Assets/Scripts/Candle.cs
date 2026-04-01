@@ -24,4 +24,9 @@ public class Candle : MonoBehaviour
     {
         animator.Play("Unlit");
     }
+
+    public void BlowOut()
+    {
+        animator.SetTrigger("fail");
+    }
 }

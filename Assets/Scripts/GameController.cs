@@ -11,14 +11,21 @@ public class GameController : MonoBehaviour
     public List<LevelData> levels = new List<LevelData>();
     public Text levelDisplay = null;
     public CandleController candleController = null;
+    public Desk desk = null;
+    public Boy boy = null;
+    public CameraFollow mainCamera = null;
 
     private bool hasFailed = false;
     private int currentLevelIndex = 0;
+    private int currentCandleIndex = 0;
 
     private void StartLevel(int index){
+        
+        boy.ResetPosition();
         LevelData level = levels[index];
 
         wordBank.setWords(level.sentences);
+        currentCandleIndex = 0;
 
         candleController.SpawnCandles(wordBank.wordCount());
 
@@ -26,6 +33,9 @@ public class GameController : MonoBehaviour
         
         timerBar.duration = level.timeLimit;
         levelDisplay.text = $"{index + 1}";
+
+        desk.ResizeDesk(wordBank.wordCount(), candleController.spacing);
+        mainCamera.ResetPosition();
     }
 
     private void NextLevel(){
@@ -81,6 +91,7 @@ public class GameController : MonoBehaviour
 
     private void checkRestart()
     {   
+        StartCoroutine(candleController.BlowOutAll());
         Debug.Log("failed - press R to restart");
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {   
@@ -106,5 +117,16 @@ public class GameController : MonoBehaviour
         StartLevel(currentLevelIndex);   
         loadNextSentence();              
         timerBar.ResetTimer();
+    }
+
+    public void incCurrentCandleIndex()
+    {
+        
+        currentCandleIndex++;
+    }
+
+    public int getCurrentCandleIndex()
+    {
+        return currentCandleIndex;
     }
 }
