@@ -4,7 +4,10 @@ public class CameraFollow : MonoBehaviour
 {   
     public Transform target;
     public Vector3 offset;
+    [SerializeField] private float speed = 3f;
     private Vector3 initialPosition;
+    private bool isRewinding = false;
+    private bool isFrozen = false;
 
 
     void Awake()
@@ -13,12 +16,35 @@ public class CameraFollow : MonoBehaviour
     }
 
     void LateUpdate(){
-        transform.position = new Vector3(target.position.x + offset.x, transform.position.y, transform.position.z);
+        
+        if(isRewinding){
+            transform.position = Vector3.Lerp(
+                transform.position,
+                initialPosition,
+                Time.deltaTime * speed          // fast then slow (ease out)
+            );
+            if (Vector3.Distance(transform.position, initialPosition) < 0.01f)
+            {
+                transform.position = initialPosition;
+                isRewinding = false;
+            }
+        } else if(!isFrozen){
 
+            transform.position = new Vector3(target.position.x + offset.x, transform.position.y, transform.position.z);
+
+        }
+    }
+
+    public void StartRewind()
+    {   
+        isRewinding = true;
+        isFrozen = true;
     }
     
     public void ResetPosition()
-    {
+    {   
+        isRewinding = false;
+        isFrozen = false;
         transform.position = initialPosition;
     }
 }

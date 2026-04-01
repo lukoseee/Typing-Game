@@ -251,8 +251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   img: {fileID: 23810282}
-  x: 0.01
-  y: 0
+  parallaxStrength: 0.02
 --- !u!114 &23810282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -928,6 +927,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   target: {fileID: 334547390}
   offset: {x: 1, y: 0, z: 0}
+  speed: 1
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0

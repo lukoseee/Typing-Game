@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level1
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   sentences:
-  - the cat
-  - sat on
-  - the mat
-  timeLimit: 4
+  - the cat with the biggest had will fall under the mat off
+  - 'sat on the first vert but will we every come back from that '
+  - 'the mat as the fellow came over but never said this '
+  timeLimit: 204

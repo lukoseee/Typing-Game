@@ -15,6 +15,8 @@ public class GameController : MonoBehaviour
     public Boy boy = null;
     public CameraFollow mainCamera = null;
 
+    private bool isBlowingOut = false;
+
     private bool hasFailed = false;
     private int currentLevelIndex = 0;
     private int currentCandleIndex = 0;
@@ -91,7 +93,14 @@ public class GameController : MonoBehaviour
 
     private void checkRestart()
     {   
-        StartCoroutine(candleController.BlowOutAll());
+
+        if (!isBlowingOut)
+        {
+            isBlowingOut = true;
+            mainCamera.StartRewind();
+            StartCoroutine(candleController.BlowOutAll());
+        }
+
         Debug.Log("failed - press R to restart");
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {   
@@ -113,6 +122,7 @@ public class GameController : MonoBehaviour
         Debug.Log("Restarting current level...");
 
         hasFailed = false;
+        isBlowingOut = false;
 
         StartLevel(currentLevelIndex);   
         loadNextSentence();              
