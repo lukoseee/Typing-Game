@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Level1
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   sentences:
-  - the cat with the biggest had will fall under the mat off
-  - 'sat on the first vert but will we every come back from that '
-  - 'the mat as the fellow came over but never said this '
-  timeLimit: 204
+  - the cat
+  - sat on at
+  - the
+  timeLimit: 3
+  message: 'Level 1 - Starting easy '

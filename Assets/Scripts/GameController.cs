@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour
     public Desk desk = null;
     public Boy boy = null;
     public CameraFollow mainCamera = null;
+    public RestartMessage restartMessage = null;
 
     private bool isBlowingOut = false;
 
@@ -21,7 +22,7 @@ public class GameController : MonoBehaviour
     private int currentLevelIndex = 0;
     private int currentCandleIndex = 0;
 
-    private void StartLevel(int index){
+    private void StartLevel(int index , bool isRestart){
         
         boy.ResetPosition();
         LevelData level = levels[index];
@@ -34,7 +35,17 @@ public class GameController : MonoBehaviour
         candleController.ResetCandles();
         
         timerBar.duration = level.timeLimit;
+        timerBar.ResetTimer();
+        timerBar.pauseTimer();
+
         levelDisplay.text = $"{index + 1}";
+
+        if(!isRestart){
+
+            restartMessage.SetMessage(level.message);
+            StartCoroutine(restartMessage.FadeInAndOut());
+
+        }
 
         desk.ResizeDesk(wordBank.wordCount(), candleController.spacing);
         mainCamera.ResetPosition();
@@ -50,21 +61,23 @@ public class GameController : MonoBehaviour
             return;
         }
 
-        StartLevel(currentLevelIndex);
+        StartLevel(currentLevelIndex, false);
 
     }
 
     private void Start()
     {   
         currentLevelIndex = 0;
-        RestartLevel();
+        StartLevel(currentLevelIndex, false);
+        loadNextSentence();
     }
 
     private void Update()
     {   
         checkTimer();
+
         if (hasFailed == true)
-        {
+        {   timerBar.pauseTimer();
             checkRestart();
         }
     }
@@ -99,6 +112,8 @@ public class GameController : MonoBehaviour
             isBlowingOut = true;
             mainCamera.StartRewind();
             StartCoroutine(candleController.BlowOutAll());
+            restartMessage.SetMessage("Press [Shift] to Restart");
+            StartCoroutine(restartMessage.FadeIn());
         }
 
         Debug.Log("failed - press R to restart");
@@ -123,10 +138,10 @@ public class GameController : MonoBehaviour
 
         hasFailed = false;
         isBlowingOut = false;
+        restartMessage.Hide();
 
-        StartLevel(currentLevelIndex);   
-        loadNextSentence();              
-        timerBar.ResetTimer();
+        StartLevel(currentLevelIndex, true);   
+        loadNextSentence();     
     }
 
     public void incCurrentCandleIndex()

@@ -1,0 +1,69 @@
+using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
+
+public class RestartMessage : MonoBehaviour
+{
+    public Text messageText;
+    public string message;
+    public float fadeInDuration = 1f;
+    public float displayDuration = 2f;
+    public float fadeOutDuration = 1f;
+
+    void Start()
+    {
+        Hide();
+        messageText.text = message;
+    }
+
+    private void SetAlpha(float a)
+    {
+        Color c = messageText.color;
+        c.a = a;
+        messageText.color = c;
+    }
+
+    public void Hide()
+    {
+        SetAlpha(0f);
+    }
+
+    public void SetMessage(string newMessage)
+    {
+        messageText.text = newMessage;
+    }
+
+    public IEnumerator FadeIn(){
+        yield return FadeText(messageText, 0f, 1f, fadeInDuration);
+    }
+
+    public IEnumerator FadeOut(){
+        yield return FadeText(messageText, 1f, 0f, fadeOutDuration);
+    }
+
+    public IEnumerator FadeInAndOut()
+    {
+        yield return FadeIn();
+        
+        // Display
+        yield return new WaitForSeconds(displayDuration);
+        
+        yield return FadeOut();
+    }
+
+    IEnumerator FadeText(Text textComponent, float startAlpha, float endAlpha, float duration)
+    {
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            Color color = textComponent.color;
+            color.a = Mathf.Lerp(startAlpha, endAlpha, elapsed / duration);
+            textComponent.color = color;
+            yield return null;
+        }
+        Color finalColor = textComponent.color;
+        finalColor.a = endAlpha;
+        textComponent.color = finalColor;
+    }
+}

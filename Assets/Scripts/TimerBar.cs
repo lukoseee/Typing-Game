@@ -3,10 +3,11 @@ using UnityEngine.UI;
 
 public class TimerBar : MonoBehaviour
 {
-    public Image timerImage;
-    public float duration = 5f;
+    [SerializeField] private Image timerImage;
 
+    public float duration = 5f;
     private float timeLeft;
+    private bool isPaused = false;
 
     void Start()
     {
@@ -14,7 +15,9 @@ public class TimerBar : MonoBehaviour
     }
 
     void Update()
-    {
+    {   
+        if (isPaused) return;
+
         if (timeLeft > 0)
         {
             timeLeft -= Time.deltaTime;
@@ -39,5 +42,15 @@ public class TimerBar : MonoBehaviour
     {
         timeLeft = 0;
         timerImage.fillAmount = 0f;
+    }
+
+    public void pauseTimer()
+    {
+        isPaused = true;
+    }
+
+    public void resumeTimer()
+    {
+        isPaused = false;
     }
 }

@@ -17,3 +17,4 @@ MonoBehaviour:
   - sat on the
   - flat one
   timeLimit: 100000
+  message: 'Level 2 - getting harder '

@@ -59,7 +59,8 @@ public class Typer : MonoBehaviour
             return;
 
         if (Input.anyKeyDown)
-        {
+        {   
+            timerBar.resumeTimer();
             string keyPressed = Input.inputString;
             if (keyPressed.Length == 1)
             {
@@ -94,8 +95,6 @@ public class Typer : MonoBehaviour
         } else 
         {
             gameController.setFailed();
-
-            timerBar.stopTimer();
             StartCoroutine(ShakeText());
             updateDisplay();
         }
