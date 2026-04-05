@@ -15,12 +15,15 @@ public class GameController : MonoBehaviour
     public Boy boy = null;
     public CameraFollow mainCamera = null;
     public RestartMessage restartMessage = null;
+    public AudioPlayer audioPlayer = null;
+    public EndLevelPopup endLevelPopup = null;
 
     private bool isBlowingOut = false;
 
     private bool hasFailed = false;
     private int currentLevelIndex = 0;
     private int currentCandleIndex = 0;
+    private bool hasFailedAlready = false;
 
     private void StartLevel(int index , bool isRestart){
         
@@ -51,7 +54,7 @@ public class GameController : MonoBehaviour
         mainCamera.ResetPosition();
     }
 
-    private void NextLevel(){
+    public void NextLevel(){
         currentLevelIndex++;
 
         Debug.Log($"Loading level {currentLevelIndex}...");
@@ -61,6 +64,8 @@ public class GameController : MonoBehaviour
             return;
         }
 
+        audioPlayer.PlayMusic(levels[currentLevelIndex]);
+        audioPlayer.resetSFX();
         StartLevel(currentLevelIndex, false);
 
     }
@@ -69,6 +74,7 @@ public class GameController : MonoBehaviour
     {   
         currentLevelIndex = 0;
         StartLevel(currentLevelIndex, false);
+        audioPlayer.PlayMusic(levels[currentLevelIndex]);
         loadNextSentence();
     }
 
@@ -77,7 +83,7 @@ public class GameController : MonoBehaviour
         checkTimer();
 
         if (hasFailed == true)
-        {   timerBar.pauseTimer();
+        {   
             checkRestart();
         }
     }
@@ -87,7 +93,7 @@ public class GameController : MonoBehaviour
         if (wordBank.isComplete())
         {   
             Debug.Log("Level Complete!");
-            NextLevel();
+            endLevelPopup.ShowWin();
         }
         string sentence = wordBank.getWord();
         typer.setCurrentSentence(sentence);
@@ -97,6 +103,10 @@ public class GameController : MonoBehaviour
     public void setFailed()
     {
         hasFailed = true;
+        audioPlayer.failSFX();
+        timerBar.pauseTimer();
+        endLevelPopup.ShowFail();
+
     }
 
     public bool getFailed()
@@ -113,21 +123,23 @@ public class GameController : MonoBehaviour
             mainCamera.StartRewind();
             StartCoroutine(candleController.BlowOutAll());
             restartMessage.SetMessage("Press [Shift] to Restart");
-            StartCoroutine(restartMessage.FadeIn());
+            restartMessage.Show();
         }
 
         Debug.Log("failed - press R to restart");
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {   
             Debug.Log("Restarting game...");
+            restartMessage.Hide();
             RestartLevel();
         }
     }
 
     private void checkTimer()
     {
-        if (timerBar.isTimerExpired())
-        {
+        if (timerBar.isTimerExpired() && !hasFailedAlready)
+        {   
+            hasFailedAlready = true;
             setFailed();
         }
     }
@@ -136,10 +148,10 @@ public class GameController : MonoBehaviour
     {
         Debug.Log("Restarting current level...");
 
+        audioPlayer.resetSFX();
         hasFailed = false;
+        hasFailedAlready = false;
         isBlowingOut = false;
-        restartMessage.Hide();
-
         StartLevel(currentLevelIndex, true);   
         loadNextSentence();     
     }

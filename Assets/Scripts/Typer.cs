@@ -19,6 +19,7 @@ public class Typer : MonoBehaviour
     public TimerBar timerBar = null;
     public CandleController candleController = null;
     public Boy boy = null;
+    public AudioPlayer audioPlayer = null;
     
     private string currentSentence = null;
     private int typedCount = 0;
@@ -78,7 +79,7 @@ public class Typer : MonoBehaviour
             if(isWordComplete()){
                 timerBar.ResetTimer();
                 boy.MoveToCandle(gameController.getCurrentCandleIndex());
-
+                audioPlayer.litSFX();
                 Debug.Log("boy moving to candle index: " + gameController.getCurrentCandleIndex());
 
                 gameController.incCurrentCandleIndex();

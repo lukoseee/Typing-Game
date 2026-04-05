@@ -23,6 +23,11 @@ public class RestartMessage : MonoBehaviour
         messageText.color = c;
     }
 
+    public void Show()
+    {
+        SetAlpha(1f);
+    }
+
     public void Hide()
     {
         SetAlpha(0f);
@@ -45,7 +50,6 @@ public class RestartMessage : MonoBehaviour
     {
         yield return FadeIn();
         
-        // Display
         yield return new WaitForSeconds(displayDuration);
         
         yield return FadeOut();

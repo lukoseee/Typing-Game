@@ -6,4 +6,5 @@ public class LevelData : ScriptableObject
     public string[] sentences;
     public float timeLimit;
     public string message;
+    public AudioClip backgroundMusic;
 }
