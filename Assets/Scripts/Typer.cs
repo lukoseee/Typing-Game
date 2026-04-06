@@ -20,9 +20,11 @@ public class Typer : MonoBehaviour
     public CandleController candleController = null;
     public Boy boy = null;
     public AudioPlayer audioPlayer = null;
+    public Stopwatch stopwatch = null;
     
     private string currentSentence = null;
     private int typedCount = 0;
+    private int correctCharCount = 0;
 
     private void Start()
     {
@@ -62,6 +64,7 @@ public class Typer : MonoBehaviour
         if (Input.anyKeyDown)
         {   
             timerBar.resumeTimer();
+            stopwatch.StartTimer();
             string keyPressed = Input.inputString;
             if (keyPressed.Length == 1)
             {
@@ -75,7 +78,7 @@ public class Typer : MonoBehaviour
         if (isCorrectLetter(letter))
         {
             typedCount++;
-            
+            correctCharCount++;
             if(isWordComplete()){
                 timerBar.ResetTimer();
                 boy.MoveToCandle(gameController.getCurrentCandleIndex());
@@ -133,5 +136,15 @@ public class Typer : MonoBehaviour
             return true;
 
         return currentSentence[typedCount] == ' ';
+    }
+
+    public void resetCharCount()
+    {
+        correctCharCount = 0;
+    }
+
+    public int getCorrectCharCount()
+    {
+        return correctCharCount;
     }
 }

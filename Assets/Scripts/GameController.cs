@@ -17,6 +17,7 @@ public class GameController : MonoBehaviour
     public RestartMessage restartMessage = null;
     public AudioPlayer audioPlayer = null;
     public EndLevelPopup endLevelPopup = null;
+    public Stopwatch stopwatch = null;
 
     private bool isBlowingOut = false;
 
@@ -27,6 +28,7 @@ public class GameController : MonoBehaviour
 
     private void StartLevel(int index , bool isRestart){
         
+        typer.resetCharCount();
         boy.ResetPosition();
         LevelData level = levels[index];
 
@@ -38,6 +40,7 @@ public class GameController : MonoBehaviour
         candleController.ResetCandles();
         
         timerBar.duration = level.timeLimit;
+        stopwatch.ResetTimer();
         timerBar.ResetTimer();
         timerBar.pauseTimer();
 
@@ -67,6 +70,7 @@ public class GameController : MonoBehaviour
         audioPlayer.PlayMusic(levels[currentLevelIndex]);
         audioPlayer.resetSFX();
         StartLevel(currentLevelIndex, false);
+        loadNextSentence();
 
     }
 
@@ -92,6 +96,7 @@ public class GameController : MonoBehaviour
     {   
         if (wordBank.isComplete())
         {   
+            timerBar.pauseTimer();
             Debug.Log("Level Complete!");
             endLevelPopup.ShowWin();
         }
@@ -122,17 +127,8 @@ public class GameController : MonoBehaviour
             isBlowingOut = true;
             mainCamera.StartRewind();
             StartCoroutine(candleController.BlowOutAll());
-            restartMessage.SetMessage("Press [Shift] to Restart");
-            restartMessage.Show();
         }
 
-        Debug.Log("failed - press R to restart");
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {   
-            Debug.Log("Restarting game...");
-            restartMessage.Hide();
-            RestartLevel();
-        }
     }
 
     private void checkTimer()
@@ -165,5 +161,15 @@ public class GameController : MonoBehaviour
     public int getCurrentCandleIndex()
     {
         return currentCandleIndex;
+    }
+
+    public int getCurrentLevel()
+    {
+        return currentLevelIndex + 1;
+    }
+
+    public LevelData getCurrentLevelData()
+    {
+        return levels[currentLevelIndex];
     }
 }
