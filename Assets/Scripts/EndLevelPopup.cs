@@ -34,6 +34,7 @@ public class EndLevelPopup : MonoBehaviour
     [SerializeField] private Text goldThreshold;
     [SerializeField] private Button upgradesButton;
     [SerializeField] private Upgrades upgrades;
+    [SerializeField] private Text graceEarned;
 
     private void Awake()
     {
@@ -63,6 +64,10 @@ public class EndLevelPopup : MonoBehaviour
         ShowCommon();
         completeText.color = Color.green;
         completeText.text = "Complete!";
+
+        int graceEarnedAmount = gameController.getCurrentLevelData().graceEarned;
+        GraceManager.Instance.Add(graceEarnedAmount);
+        graceEarned.text = $"+{graceEarnedAmount}";
 
         float wpmScore = CalculateWPM(typer.getCorrectCharCount(), gameController.stopwatch.GetTime());
         WPM.text = wpmScore.ToString("F2");

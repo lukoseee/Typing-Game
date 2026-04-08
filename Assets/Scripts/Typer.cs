@@ -26,6 +26,8 @@ public class Typer : MonoBehaviour
     private string currentSentence = null;
     private int typedCount = 0;
     private int correctCharCount = 0;
+    private bool isPaused = false;
+    private bool firstKeyPress = false;
 
     private void Start()
     {
@@ -109,16 +111,41 @@ public class Typer : MonoBehaviour
         if (gameController.getFailed())
             return;
 
-        if (Input.anyKeyDown)
+        // Check for Sacred Pause activation (press 1)
+        if (Input.GetKeyDown(KeyCode.Alpha1) && gameController.SacredPause())
+        {   
+            ActivateSacredPause();
+            return;
+        }
+
+        if (Input.anyKeyDown && !firstKeyPress)
         {   
             timerBar.resumeTimer();
-            stopwatch.StartTimer();
-            string keyPressed = Input.inputString;
-            if (keyPressed.Length == 1)
-            {
-                enterLetter(keyPressed);
-            }
+            firstKeyPress = true;
+
         }
+
+        string keyPressed = Input.inputString;
+        stopwatch.StartTimer();
+        if (keyPressed.Length == 1)
+        {
+            enterLetter(keyPressed);
+        }
+
+    }
+
+    private void ActivateSacredPause(){
+
+        if (isPaused)
+        {
+            Debug.Log("Already paused!");
+            return;
+        }
+
+        isPaused = true;
+        gameController.UseSacredPause();
+        timerBar.pauseTimer();
+        Debug.Log($"Sacred Pause activated!");
     }
 
     private void enterLetter(string letter)
@@ -134,6 +161,13 @@ public class Typer : MonoBehaviour
                 Debug.Log("boy moving to candle index: " + gameController.getCurrentCandleIndex());
 
                 gameController.incCurrentCandleIndex();
+                
+                if (isPaused)
+                {   
+                    Debug.Log("Resuming from Sacred Pause.");
+                    isPaused = false;
+                    timerBar.resumeTimer();
+                }
                 
             }   
             
@@ -154,7 +188,6 @@ public class Typer : MonoBehaviour
                 updateDisplay();
                 return;
             }    
-
             gameController.setFailed();
             StartCoroutine(ShakeText());
             updateDisplay();

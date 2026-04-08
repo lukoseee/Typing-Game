@@ -26,10 +26,12 @@ public class GameController : MonoBehaviour
     private int currentCandleIndex = 0;
     private bool hasFailedAlready = false;
     private int mistakesRemaining = 0;
+    private int sacredPauses = 0;
 
     private void StartLevel(int index , bool isRestart){
         
         ApplyForgivingFlame();
+        ApplySacredPause();
         typer.resetCharCount();
         boy.ResetPosition();
         LevelData level = levels[index];
@@ -99,7 +101,27 @@ public class GameController : MonoBehaviour
     {   
         if (Upgrades.Instance.IsPowerupEquipped(PowerupType.ForgivingFlame))
         {
-            mistakesRemaining = Upgrades.Instance.GetPowerupLevel(PowerupType.ForgivingFlame); // 1 mistake per level of Forgiving Flame
+            mistakesRemaining = Upgrades.Instance.GetPowerupLevel(PowerupType.ForgivingFlame); 
+        }
+    }
+
+    private void ApplySacredPause(){
+        if (Upgrades.Instance.IsPowerupEquipped(PowerupType.SacredPause))
+        {
+            sacredPauses = Upgrades.Instance.GetPowerupLevel(PowerupType.SacredPause);
+        }
+    }
+
+    public bool SacredPause(){
+        if ( sacredPauses <= 0) return false;
+
+        return true;
+    }
+
+    public void UseSacredPause(){
+        if (sacredPauses > 0)
+        {
+            sacredPauses--;
         }
     }
 
