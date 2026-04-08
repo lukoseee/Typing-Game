@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Typer : MonoBehaviour
 {  
@@ -10,7 +11,7 @@ public class Typer : MonoBehaviour
     [SerializeField] private float shakeDuration = 0.2f;
     [SerializeField] private float shakeMagnitude = 5f;
 
-    public Text wordOutput = null;
+    public TMP_Text wordOutput = null;
     public Color typedColor = Color.green;
     public GameController gameController = null;
     public Color remainingColor = Color.black;
@@ -53,7 +54,54 @@ public class Typer : MonoBehaviour
         string typedHex = ColorUtility.ToHtmlStringRGB(displayTypedColor);
         string remainingHex = ColorUtility.ToHtmlStringRGB(remainingColor);
 
-        wordOutput.text = $"<color=#{typedHex}>{typed}</color><color=#{remainingHex}>{remaining}</color>";
+        // Check if powerups are equipped
+        bool hasInkOfConviction = Upgrades.Instance.IsPowerupEquipped(PowerupType.InkOfConviction);
+        bool hasGuidingLight = Upgrades.Instance.IsPowerupEquipped(PowerupType.GuidingLight);
+
+        if (hasInkOfConviction)
+        {  
+            string styledTyped = "";
+
+            foreach (char c in typed)
+            {
+                if (c == ' ')
+                {
+                    styledTyped += " ";
+                }
+                else
+                {
+                    styledTyped += $"<size=120%>{c}</size>";
+                }
+            }
+
+            typed = styledTyped;
+        }
+        
+
+        // Build the display text
+        string displayText = $"<color=#{typedHex}>{typed}</color>";
+
+        if (remaining.Length > 0)
+        {
+            string nextLetter = remaining[0].ToString();
+            string restRemaining = remaining.Substring(1);
+
+            if (hasGuidingLight)
+            {
+                if (nextLetter == " ")
+                {
+                    nextLetter = $"<color=#FFFF00>_</color>"; 
+                }
+                else
+                {
+                    nextLetter = $"<color=#FFFF00><u>{nextLetter}</u></color>";
+                }
+            }
+
+            displayText += $"<color=#{remainingHex}>{nextLetter}{restRemaining}</color>";
+        }
+
+        wordOutput.text = displayText;
     }
 
     private void checkInput()
@@ -97,12 +145,22 @@ public class Typer : MonoBehaviour
             }
 
         } else 
-        {
+        {   
+            
+            if (gameController.ShouldIgnoreMistake())
+            {
+                Debug.Log("Mistake ignored!");
+                audioPlayer.failSFX();
+                updateDisplay();
+                return;
+            }    
+
             gameController.setFailed();
             StartCoroutine(ShakeText());
             updateDisplay();
         }
     }
+
 
     private bool isCorrectLetter(string letter){
         return currentSentence[typedCount].ToString() == letter;

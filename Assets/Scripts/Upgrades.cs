@@ -10,16 +10,19 @@ public class Upgrades : MonoBehaviour
     [SerializeField] private Button exitButton;
     [SerializeField] private EndLevelPopup endLevelPopup;
     [SerializeField] private Image[] equipmentSlots;
-    [SerializeField] private int maxEquipped = 2;
+    [SerializeField] private Text[] levelsUnlockedText;
 
 
-    [SerializeField] private int forgivingFlameCost = 5;
-    [SerializeField] private int sacredPauseCost = 10;
-    [SerializeField] private int inkOfConvictionCost = 6;
-    [SerializeField] private int guidingLightCost = 7;
-
+    private Dictionary<PowerupType, int[]> powerupCosts = new Dictionary<PowerupType, int[]>
+    {
+        { PowerupType.ForgivingFlame, new int[] { 5, 8, 12 } },
+        { PowerupType.SacredPause, new int[] { 10, 15, 20 } },
+        { PowerupType.InkOfConviction, new int[] { 6, 0, 0 } }, // Non-upgradable
+        { PowerupType.GuidingLight, new int[] { 7, 0, 0 } } // Non-upgradable
+    };
+    private Dictionary<PowerupType, int> powerupLevels = new Dictionary<PowerupType, int>();
     private HashSet<PowerupType> purchasedPowerups = new HashSet<PowerupType>();
-
+    private int maxEquipped = 2;
     private PowerupType[] equippedPowerups = new PowerupType[2];
     private Dictionary<PowerupType, bool> isEquipped = new Dictionary<PowerupType, bool>();
 
@@ -42,40 +45,61 @@ public class Upgrades : MonoBehaviour
         {
             equippedPowerups[i] = PowerupType.None;
         }
+
+        // Initialize levels
+        powerupLevels[PowerupType.ForgivingFlame] = 0;
+        powerupLevels[PowerupType.SacredPause] = 0;
+        powerupLevels[PowerupType.InkOfConviction] = 0;
+        powerupLevels[PowerupType.GuidingLight] = 0;
+    }
+
+    public int GetPowerupLevel(PowerupType powerupType)
+    {
+        return powerupLevels.ContainsKey(powerupType) ? powerupLevels[powerupType] : 0;
+    }
+
+
+    public int GetPowerupCost(PowerupType powerupType, int level)
+    {
+        if (powerupCosts.ContainsKey(powerupType) && level > 0 && level <= 3)
+        {
+            return powerupCosts[powerupType][level - 1];
+        }
+        return 0;
+    }
+
+    public bool IsUpgradable(PowerupType powerupType)
+    {
+        return powerupType == PowerupType.ForgivingFlame || powerupType == PowerupType.SacredPause;
     }
 
     public bool IsPowerupPurchased(PowerupType powerupType)
     {
-        return purchasedPowerups.Contains(powerupType);
+        return GetPowerupLevel(powerupType) > 0;
     }
 
-    public int GetPowerupCost(PowerupType powerupType)
-    {
-        switch (powerupType)
+    public bool IsMaxLevel(PowerupType powerupType)
+    {   
+        if (!IsUpgradable(powerupType) && IsPowerupPurchased(powerupType))
         {
-            case PowerupType.ForgivingFlame:
-                return forgivingFlameCost;
-            case PowerupType.SacredPause:
-                return sacredPauseCost;
-            case PowerupType.InkOfConviction:
-                return inkOfConvictionCost;
-            case PowerupType.GuidingLight:
-                return guidingLightCost;
-            default:
-                return 0;
+            return true; // Non-upgradable are maxed if purchased
         }
+        return GetPowerupLevel(powerupType) >= 3;
     }
 
     public bool BuyPowerup(PowerupType powerupType)
     {
-        // Already purchased
-        if (purchasedPowerups.Contains(powerupType))
+        int currentLevel = GetPowerupLevel(powerupType);
+
+        // Already maxed out
+        if (currentLevel >= 3)
         {
-            Debug.Log($"{powerupType} already purchased!");
+            Debug.Log($"{powerupType} is already maxed out!");
             return false;
         }
 
-        int cost = GetPowerupCost(powerupType);
+        int nextLevel = currentLevel + 1;
+        int cost = GetPowerupCost(powerupType, nextLevel);
 
         // Check if player can afford
         if (!GraceManager.Instance.CanAfford(cost))
@@ -84,10 +108,10 @@ public class Upgrades : MonoBehaviour
             return false;
         }
 
-        // Spend grace and add to purchased
+        // Spend grace and increase level
         GraceManager.Instance.Spend(cost);
-        purchasedPowerups.Add(powerupType);
-        Debug.Log($"Purchased {powerupType}!");
+        powerupLevels[powerupType] = nextLevel;
+        Debug.Log($"{powerupType} upgraded to level {nextLevel}!");
         return true;
     }
 
@@ -113,7 +137,6 @@ public class Upgrades : MonoBehaviour
             equipmentSlots[0].color = Color.white;
             equippedPowerups[0] = powerupType;
             isEquipped[powerupType] = true;
-            ApplyPowerupEffect(powerupType);
         }
         else if (equipmentSlots[1].sprite == null)
         {
@@ -121,7 +144,6 @@ public class Upgrades : MonoBehaviour
             equipmentSlots[1].color = Color.white;
             equippedPowerups[1] = powerupType;
             isEquipped[powerupType] = true;
-            ApplyPowerupEffect(powerupType);
         }
     }
 
@@ -139,62 +161,10 @@ public class Upgrades : MonoBehaviour
                 
                 equippedPowerups[i] = PowerupType.None;
                 isEquipped[powerupType] = false;
-                RemovePowerupEffect(powerupType);
                 return;
             }
         }
     }
-
-    private void ApplyPowerupEffect(PowerupType type)
-    {
-        switch (type)
-        {
-            case PowerupType.ForgivingFlame:
-                Debug.Log("Forgiving Flame applied!");
-                break;
-
-            case PowerupType.SacredPause:
-                Debug.Log("Sacred Pause applied!");
-                break;
-
-            case PowerupType.InkOfConviction:
-                Debug.Log("Ink of Conviction applied!");
-                break;
-
-            case PowerupType.GuidingLight:
-                Debug.Log("Guiding Light applied!");
-                break;
-
-            default:
-                break;
-        }
-    }
-
-    private void RemovePowerupEffect(PowerupType type)
-    {
-        switch (type)
-        {
-            case PowerupType.ForgivingFlame:
-                Debug.Log("Forgiving Flame removed!");
-                break;
-
-            case PowerupType.SacredPause:
-                Debug.Log("Sacred Pause removed!");
-                break;
-
-            case PowerupType.InkOfConviction:
-                Debug.Log("Ink of Conviction removed!");
-                break;
-
-            case PowerupType.GuidingLight:
-                Debug.Log("Guiding Light removed!");
-                break;
-
-            default:
-                break;
-        }
-    }
-    
 
     public bool IsPowerupEquipped(PowerupType powerupType)
     {

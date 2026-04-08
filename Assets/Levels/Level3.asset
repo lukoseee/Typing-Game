@@ -19,3 +19,8 @@ MonoBehaviour:
   timeLimit: 10000
   message: level 3 - hardest
   backgroundMusic: {fileID: 8300000, guid: 565f933295453db3e8dec7559feddf9c, type: 3}
+  ranksThresholds:
+  - 40
+  - 50
+  - 60
+  graceEarned: 0

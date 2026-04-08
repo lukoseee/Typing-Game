@@ -19,3 +19,8 @@ MonoBehaviour:
   timeLimit: 100000
   message: 'Level 2 - getting harder '
   backgroundMusic: {fileID: 8300000, guid: cd2ae6c0c073a49429fedb18cb4c83a5, type: 3}
+  ranksThresholds:
+  - 40
+  - 50
+  - 70
+  graceEarned: 0

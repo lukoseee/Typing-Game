@@ -6,12 +6,16 @@ public class Powerup : MonoBehaviour
     [SerializeField] private Image icon;
     [SerializeField] private Button equipButton;
     [SerializeField] private Button buyButton;
+    [SerializeField] private Text costText;
+    [SerializeField] private Text levelText;
     [SerializeField] private PowerupType powerupType;
 
     private void OnEnable()
     {
         equipButton.onClick.AddListener(OnEquipClicked);
         buyButton.onClick.AddListener(OnBuyClicked);
+        
+
         if (GraceManager.Instance != null)
             {
                 GraceManager.Instance.OnGraceChanged += UpdateButtonStates;
@@ -50,14 +54,39 @@ public class Powerup : MonoBehaviour
 
     private void UpdateButtonStates(int graceAmount)
     {
+        int currentLevel = Upgrades.Instance.GetPowerupLevel(powerupType);
+        bool isMaxed = Upgrades.Instance.IsMaxLevel(powerupType);
         bool isPurchased = Upgrades.Instance.IsPowerupPurchased(powerupType);
-        int cost = Upgrades.Instance.GetPowerupCost(powerupType);
+        bool isUpgradable = Upgrades.Instance.IsUpgradable(powerupType);
 
-        // Show buy button if not purchased, enable if can afford
-        buyButton.gameObject.SetActive(!isPurchased);
-        buyButton.interactable = graceAmount >= cost;
+        // Update level text
+        if (currentLevel == 0 || (!isUpgradable && isPurchased))
+        {
+            levelText.text = "";
+        }
+        else
+        {
+            levelText.text = $"LVL: {currentLevel}/3";
+        }
 
-        // Show equip button if purchased
+        // Update buy button
+        if (isMaxed)
+        {
+            buyButton.gameObject.SetActive(true);
+            costText.text = "MAX";
+            buyButton.interactable = false;
+        }
+        else
+        {
+            buyButton.gameObject.SetActive(true);
+            int nextLevel = currentLevel + 1;
+            int cost = Upgrades.Instance.GetPowerupCost(powerupType, nextLevel);
+            costText.text = cost.ToString();
+            buyButton.interactable = graceAmount >= cost;
+        }
+
+        // Show equip button only if purchased
         equipButton.gameObject.SetActive(isPurchased);
     }
+    
 }

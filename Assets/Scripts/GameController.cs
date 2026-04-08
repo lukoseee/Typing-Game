@@ -25,9 +25,11 @@ public class GameController : MonoBehaviour
     private int currentLevelIndex = 0;
     private int currentCandleIndex = 0;
     private bool hasFailedAlready = false;
+    private int mistakesRemaining = 0;
 
     private void StartLevel(int index , bool isRestart){
         
+        ApplyForgivingFlame();
         typer.resetCharCount();
         boy.ResetPosition();
         LevelData level = levels[index];
@@ -90,6 +92,26 @@ public class GameController : MonoBehaviour
         {   
             checkRestart();
         }
+    }
+
+    
+    private void ApplyForgivingFlame()
+    {   
+        if (Upgrades.Instance.IsPowerupEquipped(PowerupType.ForgivingFlame))
+        {
+            mistakesRemaining = Upgrades.Instance.GetPowerupLevel(PowerupType.ForgivingFlame); // 1 mistake per level of Forgiving Flame
+        }
+    }
+
+    public bool ShouldIgnoreMistake()
+    {   
+        if (mistakesRemaining > 0)
+        {
+            mistakesRemaining--;
+            return true;
+        }
+
+        return false;
     }
 
     public void loadNextSentence()
@@ -172,4 +194,5 @@ public class GameController : MonoBehaviour
     {
         return levels[currentLevelIndex];
     }
+
 }
