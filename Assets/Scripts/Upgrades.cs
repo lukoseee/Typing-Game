@@ -15,10 +15,10 @@ public class Upgrades : MonoBehaviour
 
     private Dictionary<PowerupType, int[]> powerupCosts = new Dictionary<PowerupType, int[]>
     {
-        { PowerupType.ForgivingFlame, new int[] { 5, 8, 12 } },
-        { PowerupType.SacredPause, new int[] { 10, 15, 20 } },
-        { PowerupType.InkOfConviction, new int[] { 6, 0, 0 } }, // Non-upgradable
-        { PowerupType.GuidingLight, new int[] { 7, 0, 0 } } // Non-upgradable
+        { PowerupType.ForgivingFlame, new int[] { 4, 5, 6 } },
+        { PowerupType.SacredPause, new int[] { 4, 5, 6 } },
+        { PowerupType.InkOfConviction, new int[] { 3, 0, 0 } }, // Non-upgradable
+        { PowerupType.GuidingLight, new int[] { 3, 0, 0 } } // Non-upgradable
     };
     private Dictionary<PowerupType, int> powerupLevels = new Dictionary<PowerupType, int>();
     private HashSet<PowerupType> purchasedPowerups = new HashSet<PowerupType>();

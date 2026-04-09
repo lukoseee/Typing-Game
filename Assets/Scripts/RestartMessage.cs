@@ -55,7 +55,7 @@ public class RestartMessage : MonoBehaviour
         yield return FadeOut();
     }
 
-    IEnumerator FadeText(Text textComponent, float startAlpha, float endAlpha, float duration)
+    public IEnumerator FadeText(Text textComponent, float startAlpha, float endAlpha, float duration)
     {
         float elapsed = 0f;
         while (elapsed < duration)

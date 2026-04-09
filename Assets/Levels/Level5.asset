@@ -10,19 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 297ba3bd92d6b26b9b7210c5bbc3dc1b, type: 3}
-  m_Name: Level2
+  m_Name: Level5
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   sentences:
-  - he makes me lie down in green pastures
-  - he leads me beside still waters
-  - he restores my soul
-  timeLimit: 5
-  message: Level 2 - A Bit Longer
-  backgroundMusic: {fileID: 8300000, guid: cd2ae6c0c073a49429fedb18cb4c83a5, type: 3}
+  - 'Deliver me from mine enemies '
+  - O my God
+  - Defend me from them that rise up against me
+  - The mighty are gathered against me
+  timeLimit: 6
+  message: Level 5 - Capital and Lowercase
+  backgroundMusic: {fileID: 8300000, guid: 70178e838a5bcc029962d01ac7585777, type: 3}
   ranksThresholds:
-  - 50
+  - 55
   - 60
   - 70
-  graceEarned: 2
-  baseGraceAwarded: 0
+  graceEarned: 3
+  baseGraceAwarded: 1
   highestRankAwarded: 0

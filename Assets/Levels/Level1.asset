@@ -13,14 +13,16 @@ MonoBehaviour:
   m_Name: Level1
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   sentences:
-  - 'the cat '
-  - sat on at
-  - the
-  timeLimit: 4
-  message: 'Level 1 - Starting easy '
+  - in the beginning
+  - god created the
+  - heavens and the earth
+  timeLimit: 10
+  message: 'Level 1 - Starting Easy '
   backgroundMusic: {fileID: 8300000, guid: 70178e838a5bcc029962d01ac7585777, type: 3}
   ranksThresholds:
   - 40
   - 60
-  - 85
-  graceEarned: 5
+  - 65
+  graceEarned: 1
+  baseGraceAwarded: 0
+  highestRankAwarded: 0

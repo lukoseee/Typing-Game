@@ -65,15 +65,35 @@ public class EndLevelPopup : MonoBehaviour
         completeText.color = Color.green;
         completeText.text = "Complete!";
 
-        int graceEarnedAmount = gameController.getCurrentLevelData().graceEarned;
-        GraceManager.Instance.Add(graceEarnedAmount);
-        graceEarned.text = $"+{graceEarnedAmount}";
-
         float wpmScore = CalculateWPM(typer.getCorrectCharCount(), gameController.stopwatch.GetTime());
         WPM.text = wpmScore.ToString("F2");
         Rank rank = GetRank(wpmScore);
         DisplayRank(rank);
 
+        LevelData levelData = gameController.getCurrentLevelData();
+
+        // Award base grace only once
+        if (!levelData.HasBaseGraceBeenAwarded())
+        {
+            int baseGrace = levelData.graceEarned;
+            GraceManager.Instance.Add(baseGrace);
+            graceEarned.text = $"+{baseGrace}";
+            levelData.SetBaseGraceAwarded();
+        }
+        else
+        {
+            graceEarned.text = "+0";
+        }
+
+        // Award rank bonuses only if this is a new/better rank
+        if (rank > levelData.GetHighestRankAwarded())
+        {
+            int bonusGrace = GetBonusForRank(rank);
+            GraceManager.Instance.Add(bonusGrace);
+            graceEarned.text += $"+{bonusGrace}";
+            levelData.SetHighestRankAwarded(rank);
+        }
+        
         nextButton.gameObject.SetActive(true);
     }
 
@@ -134,14 +154,37 @@ public class EndLevelPopup : MonoBehaviour
     {   
         float[] thresholds = gameController.getCurrentLevelData().ranksThresholds;
 
-        if (score >= thresholds[2]) return Rank.Gold;
-        if (score >= thresholds[1]) return Rank.Silver;
-        if (score >= thresholds[0]) return Rank.Bronze;
+        if (score >= thresholds[2]){ 
+            return Rank.Gold; 
+        }
+        if (score >= thresholds[1]) { 
+            return Rank.Silver; 
+        }
+        if (score >= thresholds[0]) { 
+            return Rank.Bronze; 
+        }
         return Rank.None;
+    }
+
+    private int GetBonusForRank(Rank rank)
+    {
+        switch (rank)
+        {
+            case Rank.Bronze:
+                return 1;
+            case Rank.Silver:
+                return 2;
+            case Rank.Gold:
+                return 3;
+            default:
+                return 0;
+        }
     }
 
     private void OnUpgradesClicked()
     {
         upgrades.Show();
     }
+    
+    
 }

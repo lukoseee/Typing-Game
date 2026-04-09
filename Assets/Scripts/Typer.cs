@@ -187,7 +187,8 @@ public class Typer : MonoBehaviour
                 audioPlayer.failSFX();
                 updateDisplay();
                 return;
-            }    
+            }
+            ResetFirstKeyPress();  
             gameController.setFailed();
             StartCoroutine(ShakeText());
             updateDisplay();
@@ -237,5 +238,10 @@ public class Typer : MonoBehaviour
     public int getCorrectCharCount()
     {
         return correctCharCount;
+    }
+
+    public void ResetFirstKeyPress()
+    {
+        firstKeyPress = false;
     }
 }

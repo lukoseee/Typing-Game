@@ -10,19 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 297ba3bd92d6b26b9b7210c5bbc3dc1b, type: 3}
-  m_Name: Level2
+  m_Name: Level8
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   sentences:
-  - he makes me lie down in green pastures
-  - he leads me beside still waters
-  - he restores my soul
-  timeLimit: 5
-  message: Level 2 - A Bit Longer
-  backgroundMusic: {fileID: 8300000, guid: cd2ae6c0c073a49429fedb18cb4c83a5, type: 3}
+  - I am the resurrection and the life.
+  - The one who believes in me will live
+  - ', even though they die;'
+  - and whoever lives by believing in me will never die.
+  - Do you believe this?
+  timeLimit: 3
+  message: Level 8 -
+  backgroundMusic: {fileID: 8300000, guid: 565f933295453db3e8dec7559feddf9c, type: 3}
   ranksThresholds:
   - 50
-  - 60
-  - 70
-  graceEarned: 2
+  - 55
+  - 65
+  graceEarned: 3
   baseGraceAwarded: 0
   highestRankAwarded: 0

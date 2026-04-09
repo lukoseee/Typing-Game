@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 
 public class GameController : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class GameController : MonoBehaviour
     public AudioPlayer audioPlayer = null;
     public EndLevelPopup endLevelPopup = null;
     public Stopwatch stopwatch = null;
+    [SerializeField] private TMP_Text wordOutput = null;
 
     private bool isBlowingOut = false;
 
@@ -28,8 +30,20 @@ public class GameController : MonoBehaviour
     private int mistakesRemaining = 0;
     private int sacredPauses = 0;
 
-    private void StartLevel(int index , bool isRestart){
+    private Coroutine fadeCoroutine;
+    private Coroutine swayCoroutine;
+    private RectTransform textRectTransform;
+
+    private void StartLevel(int index ){
         
+        if(IsLastLevel()){
+            fadeCoroutine = StartCoroutine(FadeSentencesRoutine());
+        }
+
+        if(index == 7){
+            swayCoroutine = StartCoroutine(SwayTextRoutine());
+        }
+
         ApplyForgivingFlame();
         ApplySacredPause();
         typer.resetCharCount();
@@ -50,15 +64,13 @@ public class GameController : MonoBehaviour
 
         levelDisplay.text = $"{index + 1}";
 
-        if(!isRestart){
+        restartMessage.SetMessage(level.message);
+        StartCoroutine(restartMessage.FadeInAndOut());
 
-            restartMessage.SetMessage(level.message);
-            StartCoroutine(restartMessage.FadeInAndOut());
-
-        }
 
         desk.ResizeDesk(wordBank.wordCount(), candleController.spacing);
         mainCamera.ResetPosition();
+        typer.ResetFirstKeyPress();
     }
 
     public void NextLevel(){
@@ -67,21 +79,30 @@ public class GameController : MonoBehaviour
         Debug.Log($"Loading level {currentLevelIndex}...");
         if (currentLevelIndex >= levels.Count)
         {
+            restartMessage.SetMessage("Thanks for playing!");
+            restartMessage.Show();
             Debug.Log("Game Complete!");
             return;
         }
 
+        StopSway();
         audioPlayer.PlayMusic(levels[currentLevelIndex]);
         audioPlayer.resetSFX();
-        StartLevel(currentLevelIndex, false);
+        StartLevel(currentLevelIndex);
         loadNextSentence();
 
     }
 
     private void Start()
     {   
-        currentLevelIndex = 0;
-        StartLevel(currentLevelIndex, false);
+        foreach (LevelData level in levels)
+        {
+            level.ResetForNewGame();
+        }
+
+        textRectTransform = wordOutput.GetComponent<RectTransform>();
+        currentLevelIndex = 8;
+        StartLevel(currentLevelIndex);
         audioPlayer.PlayMusic(levels[currentLevelIndex]);
         loadNextSentence();
     }
@@ -184,15 +205,30 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void RestartLevel()
+    private void StopSway()
     {
+        if (swayCoroutine != null)
+        {
+            StopCoroutine(swayCoroutine);
+        }
+    }
+
+    public void RestartLevel()
+    {   
+        if (fadeCoroutine != null)
+        {
+            StopCoroutine(fadeCoroutine);  
+        }
+
+        StopSway();
+
         Debug.Log("Restarting current level...");
 
         audioPlayer.resetSFX();
         hasFailed = false;
         hasFailedAlready = false;
         isBlowingOut = false;
-        StartLevel(currentLevelIndex, true);   
+        StartLevel(currentLevelIndex);   
         loadNextSentence();     
     }
 
@@ -217,4 +253,52 @@ public class GameController : MonoBehaviour
         return levels[currentLevelIndex];
     }
 
+    private bool IsLastLevel()
+    {
+        return currentLevelIndex >= levels.Count - 1;
+    }
+
+    private IEnumerator FadeSentencesRoutine()
+    {
+        while (true)
+        {            
+            yield return StartCoroutine(FadeText(0f, 1f, 0.1f));
+            
+            yield return new WaitForSeconds(4f);
+            
+            yield return StartCoroutine(FadeText(1f, 0f, 0.1f));
+            
+            yield return new WaitForSeconds(2f);
+        }
+    }
+
+    private IEnumerator FadeText(float startAlpha, float endAlpha, float duration)
+    {
+        float elapsed = 0f;
+        Color originalColor = wordOutput.color;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float alpha = Mathf.Lerp(startAlpha, endAlpha, elapsed / duration);
+            wordOutput.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
+            yield return null;
+        }
+
+        wordOutput.color = new Color(originalColor.r, originalColor.g, originalColor.b, endAlpha);
+    }
+
+    private IEnumerator SwayTextRoutine()
+    {
+        Vector3 originalPosition = textRectTransform.anchoredPosition;
+        float swayAmount = 20f; 
+        float swaySpeed = 4f; 
+
+        while (true)
+        {
+            float xOffset = Mathf.Sin(Time.time * swaySpeed) * swayAmount;
+            textRectTransform.anchoredPosition = originalPosition + new Vector3(xOffset, 0, 0);
+            yield return null;
+        }
+    }
 }

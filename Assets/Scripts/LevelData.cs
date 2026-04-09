@@ -9,4 +9,35 @@ public class LevelData : ScriptableObject
     public AudioClip backgroundMusic;
     public float[] ranksThresholds;
     public int graceEarned;
+
+    // Track if rewards have been given
+    [SerializeField] private bool baseGraceAwarded = false;
+    [SerializeField] private Rank highestRankAwarded = Rank.None;
+
+    public bool HasBaseGraceBeenAwarded()
+    {
+        return baseGraceAwarded;
+    }
+
+    public void SetBaseGraceAwarded()
+    {
+        baseGraceAwarded = true;
+    }
+
+    public Rank GetHighestRankAwarded()
+    {
+        return highestRankAwarded;
+    }
+
+    public void SetHighestRankAwarded(Rank rank)
+    {
+        highestRankAwarded = rank;
+    }
+
+    public void ResetForNewGame()
+    {
+        baseGraceAwarded = false;
+        highestRankAwarded = Rank.None;
+    }
+
 }
