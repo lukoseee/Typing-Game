@@ -2,16 +2,17 @@ using UnityEngine;
 using System.Collections;
 
 public class Boy : MonoBehaviour
-{   public float moveSpeed = 5f;
+{   
+    [SerializeField] private float moveSpeed = 5f;
     private Animator animator;
-    public Vector3 initialPosition;
+    [SerializeField] private Vector3 initialPosition;
 
     private Vector3 targetPosition;
     private bool isMoving = false;
 
     private int targetCandleIndex;
-    public CandleController candleController;
-    public GameController gameController;
+    [SerializeField] private CandleController candleController;
+    [SerializeField] private GameController gameController;
     
     void Awake()
     {
@@ -30,7 +31,6 @@ public class Boy : MonoBehaviour
 
         Vector3 candlePos = candleController.GetCandlePosition(candleIndex);
 
-        // Only move on X axis
         targetPosition = new Vector3(candlePos.x, transform.position.y, transform.position.z);
 
         isMoving = true;
@@ -41,17 +41,14 @@ public class Boy : MonoBehaviour
     {
         if (!isMoving) return;
 
-        // Move toward target
         transform.position = Vector3.MoveTowards(
             transform.position,
             targetPosition,
             moveSpeed * Time.deltaTime
         );
 
-        // Check if reached
         if (Mathf.Abs(transform.position.x - targetPosition.x) < 0.05f)
         {
-            // Stop walking and play Light animation
             isMoving = false;
             animator.SetBool("isWalking", false);
             candleController.lightNextCandle(targetCandleIndex);

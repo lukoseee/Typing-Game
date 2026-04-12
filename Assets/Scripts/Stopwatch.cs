@@ -4,14 +4,12 @@ public class Stopwatch : MonoBehaviour
 {   
     private bool timerActive;
     private float currentTime;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    
     void Start()
     {   
         currentTime = 0f;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(timerActive)

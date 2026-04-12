@@ -10,7 +10,6 @@ public class LevelData : ScriptableObject
     public float[] ranksThresholds;
     public int graceEarned;
 
-    // Track if rewards have been given
     [SerializeField] private bool baseGraceAwarded = false;
     [SerializeField] private Rank highestRankAwarded = Rank.None;
 

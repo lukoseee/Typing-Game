@@ -17,6 +17,8 @@ MonoBehaviour:
   - O my God
   - Defend me from them that rise up against me
   - The mighty are gathered against me
+  - Deliver me from the workers of iniquity
+  - and save me from bloody men
   timeLimit: 6
   message: Level 5 - Capital and Lowercase
   backgroundMusic: {fileID: 8300000, guid: 70178e838a5bcc029962d01ac7585777, type: 3}

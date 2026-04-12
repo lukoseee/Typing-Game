@@ -17,9 +17,10 @@ public class Upgrades : MonoBehaviour
     {
         { PowerupType.ForgivingFlame, new int[] { 4, 5, 6 } },
         { PowerupType.SacredPause, new int[] { 4, 5, 6 } },
-        { PowerupType.InkOfConviction, new int[] { 3, 0, 0 } }, // Non-upgradable
-        { PowerupType.GuidingLight, new int[] { 3, 0, 0 } } // Non-upgradable
+        { PowerupType.InkOfConviction, new int[] { 1, 0, 0 } }, 
+        { PowerupType.GuidingLight, new int[] { 3, 0, 0 } } 
     };
+
     private Dictionary<PowerupType, int> powerupLevels = new Dictionary<PowerupType, int>();
     private HashSet<PowerupType> purchasedPowerups = new HashSet<PowerupType>();
     private int maxEquipped = 2;
@@ -40,13 +41,11 @@ public class Upgrades : MonoBehaviour
 
         exitButton.onClick.AddListener(OnExitClicked);
 
-        // Initialize
         for (int i = 0; i < maxEquipped; i++)
         {
             equippedPowerups[i] = PowerupType.None;
         }
 
-        // Initialize levels
         powerupLevels[PowerupType.ForgivingFlame] = 0;
         powerupLevels[PowerupType.SacredPause] = 0;
         powerupLevels[PowerupType.InkOfConviction] = 0;
@@ -82,7 +81,7 @@ public class Upgrades : MonoBehaviour
     {   
         if (!IsUpgradable(powerupType) && IsPowerupPurchased(powerupType))
         {
-            return true; // Non-upgradable are maxed if purchased
+            return true; 
         }
         return GetPowerupLevel(powerupType) >= 3;
     }
@@ -91,7 +90,6 @@ public class Upgrades : MonoBehaviour
     {
         int currentLevel = GetPowerupLevel(powerupType);
 
-        // Already maxed out
         if (currentLevel >= 3)
         {
             Debug.Log($"{powerupType} is already maxed out!");
@@ -101,14 +99,12 @@ public class Upgrades : MonoBehaviour
         int nextLevel = currentLevel + 1;
         int cost = GetPowerupCost(powerupType, nextLevel);
 
-        // Check if player can afford
         if (!GraceManager.Instance.CanAfford(cost))
         {
             Debug.Log("Not enough grace!");
             return false;
         }
 
-        // Spend grace and increase level
         GraceManager.Instance.Spend(cost);
         powerupLevels[powerupType] = nextLevel;
         Debug.Log($"{powerupType} upgraded to level {nextLevel}!");
@@ -117,20 +113,17 @@ public class Upgrades : MonoBehaviour
 
     public void EquipPowerup(Sprite powerupIcon, PowerupType powerupType)
     {
-        // If already equipped, unequip it
         if (isEquipped.ContainsKey(powerupType) && isEquipped[powerupType])
         {
             UnequipPowerup(powerupType);
             return;
         }
 
-        // If slots full, replace slot 0
         if (equipmentSlots[0].sprite != null && equipmentSlots[1].sprite != null)
         {
             UnequipPowerup(equippedPowerups[0]);
         }
 
-        // Find first empty slot
         if (equipmentSlots[0].sprite == null)
         {
             equipmentSlots[0].sprite = powerupIcon;
@@ -157,7 +150,7 @@ public class Upgrades : MonoBehaviour
                 equipmentSlots[i].color = new Color32(26, 20, 40, 255);
                 
                 Outline outline = equipmentSlots[i].GetComponent<Outline>();
-                outline.effectColor = new Color32(147, 112, 219, 255); // or your purple
+                outline.effectColor = new Color32(147, 112, 219, 255); 
                 
                 equippedPowerups[i] = PowerupType.None;
                 isEquipped[powerupType] = false;

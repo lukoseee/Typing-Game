@@ -6,23 +6,22 @@ using TMPro;
 
 public class GameController : MonoBehaviour
 {
-    public Typer typer = null;
-    public WordBank wordBank = null;
-    public TimerBar timerBar = null;
-    public List<LevelData> levels = new List<LevelData>();
-    public Text levelDisplay = null;
-    public CandleController candleController = null;
-    public Desk desk = null;
-    public Boy boy = null;
-    public CameraFollow mainCamera = null;
-    public RestartMessage restartMessage = null;
-    public AudioPlayer audioPlayer = null;
-    public EndLevelPopup endLevelPopup = null;
-    public Stopwatch stopwatch = null;
+    [SerializeField] private Typer typer = null;
+    [SerializeField] private WordBank wordBank = null;
+    [SerializeField] private TimerBar timerBar = null;
+    [SerializeField] private List<LevelData> levels = new List<LevelData>();
+    [SerializeField] private Text levelDisplay = null;
+    [SerializeField] private CandleController candleController = null;
+    [SerializeField] private Desk desk = null;
+    [SerializeField] private Boy boy = null;
+    [SerializeField] private CameraFollow mainCamera = null;
+    [SerializeField] private RestartMessage restartMessage = null;
+    [SerializeField] private AudioPlayer audioPlayer = null;
+    [SerializeField] private EndLevelPopup endLevelPopup = null;
     [SerializeField] private TMP_Text wordOutput = null;
+    public Stopwatch stopwatch = null;
 
     private bool isBlowingOut = false;
-
     private bool hasFailed = false;
     private int currentLevelIndex = 0;
     private int currentCandleIndex = 0;
@@ -57,7 +56,7 @@ public class GameController : MonoBehaviour
 
         candleController.ResetCandles();
         
-        timerBar.duration = level.timeLimit;
+        timerBar.SetDuration(level.timeLimit);
         stopwatch.ResetTimer();
         timerBar.ResetTimer();
         timerBar.pauseTimer();
@@ -68,7 +67,7 @@ public class GameController : MonoBehaviour
         StartCoroutine(restartMessage.FadeInAndOut());
 
 
-        desk.ResizeDesk(wordBank.wordCount(), candleController.spacing);
+        desk.ResizeDesk(wordBank.wordCount(), candleController.GetSpacing());
         mainCamera.ResetPosition();
         typer.ResetFirstKeyPress();
     }
@@ -101,7 +100,7 @@ public class GameController : MonoBehaviour
         }
 
         textRectTransform = wordOutput.GetComponent<RectTransform>();
-        currentLevelIndex = 8;
+        currentLevelIndex = 0;
         StartLevel(currentLevelIndex);
         audioPlayer.PlayMusic(levels[currentLevelIndex]);
         loadNextSentence();

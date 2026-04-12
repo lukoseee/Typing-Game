@@ -8,14 +8,12 @@ public class Scroller : MonoBehaviour
     private Camera mainCamera;
     private float lastCameraX;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         mainCamera = Camera.main;
         lastCameraX = mainCamera.transform.position.x;
     }
 
-    // Update is called once per frame
     void Update()
     {
         float cameraDelta = mainCamera.transform.position.x - lastCameraX;

@@ -5,7 +5,7 @@ public class TimerBar : MonoBehaviour
 {
     [SerializeField] private Image timerImage;
 
-    public float duration = 5f;
+    private float duration = 0f;
     private float timeLeft;
     private bool isPaused = false;
 
@@ -52,5 +52,10 @@ public class TimerBar : MonoBehaviour
     public void resumeTimer()
     {
         isPaused = false;
+    }
+
+    public void SetDuration(float newDuration)
+    {
+        duration = newDuration;
     }
 }

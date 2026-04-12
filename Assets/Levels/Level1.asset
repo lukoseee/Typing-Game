@@ -20,9 +20,9 @@ MonoBehaviour:
   message: 'Level 1 - Starting Easy '
   backgroundMusic: {fileID: 8300000, guid: 70178e838a5bcc029962d01ac7585777, type: 3}
   ranksThresholds:
-  - 40
+  - 55
   - 60
-  - 65
+  - 70
   graceEarned: 1
-  baseGraceAwarded: 0
-  highestRankAwarded: 0
+  baseGraceAwarded: 1
+  highestRankAwarded: 1

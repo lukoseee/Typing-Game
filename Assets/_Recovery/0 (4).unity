@@ -331,7 +331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf2301a6b55d64bbf8b04529254fecf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  graceAmount: 0
+  graceAmount: 30
 --- !u!1 &58308308
 GameObject:
   m_ObjectHideFlags: 0
@@ -2571,7 +2571,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3454212358234779109, guid: e0d63873623c7490ba031a45ef79882b, type: 3}
       propertyPath: m_Text
-      value: Timer stops for a word (press 2 to activate)
+      value: Timer stops for a word (press 1 to activate)
       objectReference: {fileID: 0}
     - target: {fileID: 4273783951922803541, guid: e0d63873623c7490ba031a45ef79882b, type: 3}
       propertyPath: m_SizeDelta.x

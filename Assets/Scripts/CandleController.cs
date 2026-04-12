@@ -6,13 +6,13 @@ public class CandleController : MonoBehaviour
 {   
 
     private List<Candle> candles = new List<Candle>();
-
-
-    public int spacing = 2;
-    public float initialX = -8.191f;
-    public Candle candlePrefab;
-    public Transform candleParent;
-    public GameController gameController;
+    [SerializeField] private int spacing = 2;
+    [SerializeField] private float initialX = -8.191f;
+    [SerializeField] private Candle candlePrefab;
+    [SerializeField] private Transform candleParent;
+    [SerializeField] private GameController gameController;
+    [SerializeField] private float height = -11.217f;
+    [SerializeField] private float zPos = 80.7380f;
 
     public void lightNextCandle(int index)
     {   
@@ -36,7 +36,6 @@ public class CandleController : MonoBehaviour
 
     public void SpawnCandles(int count)
     {
-        // Clear old candles
         foreach (var c in candles)
         {
             if (c != null) Destroy(c.gameObject);
@@ -44,10 +43,9 @@ public class CandleController : MonoBehaviour
 
         candles.Clear();
 
-        // Spawn new candles
         for (int i = 0; i < count; i++)
         {
-            Vector3 pos = new Vector3(initialX + (i * spacing), -11.217f, -0.26f); // fixed y and z
+            Vector3 pos = new Vector3(initialX + (i * spacing), height, zPos);
             Candle newCandle = Instantiate(candlePrefab, pos, Quaternion.identity, candleParent);
             candles.Add(newCandle);
         }
@@ -69,15 +67,19 @@ public class CandleController : MonoBehaviour
 
     public IEnumerator BlowOutAll()
     {   
-        // Start from the last lit candle
+        
         for (int i = gameController.getCurrentCandleIndex() - 1; i >= 0; i--)
         {
             candles[i].BlowOut();
 
-            // small delay between each candle
-            yield return new WaitForSeconds(0.15f);
+            yield return new WaitForSeconds(0.2f);
         }
 
+    }
+
+    public int GetSpacing()
+    {
+        return spacing;
     }
     
 }

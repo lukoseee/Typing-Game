@@ -20,9 +20,9 @@ MonoBehaviour:
   message: Level 2 - A Bit Longer
   backgroundMusic: {fileID: 8300000, guid: cd2ae6c0c073a49429fedb18cb4c83a5, type: 3}
   ranksThresholds:
-  - 50
+  - 55
   - 60
   - 70
   graceEarned: 2
-  baseGraceAwarded: 0
-  highestRankAwarded: 0
+  baseGraceAwarded: 1
+  highestRankAwarded: 1

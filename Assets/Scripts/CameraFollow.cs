@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {   
-    public Transform target;
-    public Vector3 offset;
+    [SerializeField] private Transform target;
+    [SerializeField] private Vector3 offset;
     [SerializeField] private float speed = 3f;
     private Vector3 initialPosition;
     private bool isRewinding = false;
@@ -21,7 +21,7 @@ public class CameraFollow : MonoBehaviour
             transform.position = Vector3.Lerp(
                 transform.position,
                 initialPosition,
-                Time.deltaTime * speed          // fast then slow (ease out)
+                Time.deltaTime * speed         
             );
             if (Vector3.Distance(transform.position, initialPosition) < 0.01f)
             {

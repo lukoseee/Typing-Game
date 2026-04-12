@@ -33,7 +33,6 @@ public class Powerup : MonoBehaviour
 
     private void OnEquipClicked()
     {   
-        // Only allow equip if purchased
         if (!Upgrades.Instance.IsPowerupPurchased(powerupType))
         {
             Debug.Log("You must purchase this powerup first!");
@@ -59,7 +58,6 @@ public class Powerup : MonoBehaviour
         bool isPurchased = Upgrades.Instance.IsPowerupPurchased(powerupType);
         bool isUpgradable = Upgrades.Instance.IsUpgradable(powerupType);
 
-        // Update level text
         if (currentLevel == 0 || (!isUpgradable && isPurchased))
         {
             levelText.text = "";
@@ -69,7 +67,6 @@ public class Powerup : MonoBehaviour
             levelText.text = $"LVL: {currentLevel}/3";
         }
 
-        // Update buy button
         if (isMaxed)
         {
             buyButton.gameObject.SetActive(true);
@@ -85,7 +82,6 @@ public class Powerup : MonoBehaviour
             buyButton.interactable = graceAmount >= cost;
         }
 
-        // Show equip button only if purchased
         equipButton.gameObject.SetActive(isPurchased);
     }
     

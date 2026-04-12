@@ -48,7 +48,6 @@ public class EndLevelPopup : MonoBehaviour
 
     public void DisplayRank(Rank rank)
     {
-        // Fill based on achieved rank
         if (rank >= Rank.Bronze)
             bronzeImage.sprite = bronzeFull;
 
@@ -72,7 +71,6 @@ public class EndLevelPopup : MonoBehaviour
 
         LevelData levelData = gameController.getCurrentLevelData();
 
-        // Award base grace only once
         if (!levelData.HasBaseGraceBeenAwarded())
         {
             int baseGrace = levelData.graceEarned;
@@ -84,8 +82,7 @@ public class EndLevelPopup : MonoBehaviour
         {
             graceEarned.text = "+0";
         }
-
-        // Award rank bonuses only if this is a new/better rank
+        
         if (rank > levelData.GetHighestRankAwarded())
         {
             int bonusGrace = GetBonusForRank(rank);

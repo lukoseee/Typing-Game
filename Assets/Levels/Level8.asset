@@ -19,12 +19,12 @@ MonoBehaviour:
   - and whoever lives by believing in me will never die.
   - Do you believe this?
   timeLimit: 3
-  message: Level 8 -
+  message: Level 8 - Swaying Scripture
   backgroundMusic: {fileID: 8300000, guid: 565f933295453db3e8dec7559feddf9c, type: 3}
   ranksThresholds:
-  - 50
   - 55
-  - 65
+  - 60
+  - 70
   graceEarned: 3
   baseGraceAwarded: 0
   highestRankAwarded: 0

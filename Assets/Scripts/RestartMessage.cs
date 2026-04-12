@@ -4,11 +4,11 @@ using System.Collections;
 
 public class RestartMessage : MonoBehaviour
 {
-    public Text messageText;
-    public string message;
-    public float fadeInDuration = 1f;
-    public float displayDuration = 2f;
-    public float fadeOutDuration = 1f;
+    [SerializeField] private Text messageText;
+    [SerializeField] private string message;
+    [SerializeField] private float fadeInDuration = 1f;
+    [SerializeField] private float displayDuration = 2f;
+    [SerializeField] private float fadeOutDuration = 1f;
 
     void Start()
     {

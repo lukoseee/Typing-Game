@@ -7,28 +7,25 @@ using TMPro;
 
 public class Typer : MonoBehaviour
 {  
-    private Vector2 originalPosition;
     [SerializeField] private float shakeDuration = 0.2f;
     [SerializeField] private float shakeMagnitude = 5f;
-
-    public TMP_Text wordOutput = null;
-    public Color typedColor = Color.green;
-    public GameController gameController = null;
-    public Color remainingColor = Color.black;
-    public Color failedColor = Color.red;
-    public WordBank wordBank = null;
-    public TimerBar timerBar = null;
-    public CandleController candleController = null;
-    public Boy boy = null;
-    public AudioPlayer audioPlayer = null;
-    public Stopwatch stopwatch = null;
+    [SerializeField] private TMP_Text wordOutput = null;
+    [SerializeField] private Color typedColor = Color.green;
+    [SerializeField] private GameController gameController = null;
+    [SerializeField] private Color remainingColor = Color.black;
+    [SerializeField] private Color failedColor = Color.red;
+    [SerializeField] private TimerBar timerBar = null;
+    [SerializeField] private Boy boy = null;
+    [SerializeField] private AudioPlayer audioPlayer = null;
+    [SerializeField] private Stopwatch stopwatch = null;
     
     private string currentSentence = null;
     private int typedCount = 0;
     private int correctCharCount = 0;
     private bool isPaused = false;
     private bool firstKeyPress = false;
-
+    private Vector2 originalPosition;
+    
     private void Start()
     {
         originalPosition = wordOutput.transform.localPosition;
@@ -56,7 +53,6 @@ public class Typer : MonoBehaviour
         string typedHex = ColorUtility.ToHtmlStringRGB(displayTypedColor);
         string remainingHex = ColorUtility.ToHtmlStringRGB(remainingColor);
 
-        // Check if powerups are equipped
         bool hasInkOfConviction = Upgrades.Instance.IsPowerupEquipped(PowerupType.InkOfConviction);
         bool hasGuidingLight = Upgrades.Instance.IsPowerupEquipped(PowerupType.GuidingLight);
 
@@ -79,8 +75,6 @@ public class Typer : MonoBehaviour
             typed = styledTyped;
         }
         
-
-        // Build the display text
         string displayText = $"<color=#{typedHex}>{typed}</color>";
 
         if (remaining.Length > 0)
@@ -110,9 +104,8 @@ public class Typer : MonoBehaviour
     {       
         if (gameController.getFailed())
             return;
-
-        // Check for Sacred Pause activation (press 1)
-        if (Input.GetKeyDown(KeyCode.Alpha1) && gameController.SacredPause())
+            
+        if (Input.GetKeyDown(KeyCode.Alpha2) && gameController.SacredPause())
         {   
             ActivateSacredPause();
             return;
