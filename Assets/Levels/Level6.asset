@@ -15,9 +15,8 @@ MonoBehaviour:
   sentences:
   - Proclaim ye this among the Gentiles;
   - Prepare war, wake up the mighty men,
-  - 'let all the men of war draw near: '
+  - 'let all the men of war draw near:'
   - let them come up.
-  - Beat your plowshares into swords.
   timeLimit: 4.5
   message: Level 6 - Punctuation
   backgroundMusic: {fileID: 8300000, guid: 565f933295453db3e8dec7559feddf9c, type: 3}
@@ -26,5 +25,8 @@ MonoBehaviour:
   - 60
   - 70
   graceEarned: 3
-  baseGraceAwarded: 0
+  baseGraceAwarded: 1
   highestRankAwarded: 0
+  visualChallenge: 0
+  maskMarker: 42
+  fadeWordMarker: 126

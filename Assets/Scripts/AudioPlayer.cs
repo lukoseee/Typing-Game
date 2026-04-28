@@ -7,6 +7,7 @@ public class AudioPlayer : MonoBehaviour
     
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private AudioSource failSFXSource;
     [SerializeField] private AudioClip fail;
     [SerializeField] private AudioClip lit;
     [SerializeField] private float pitch;
@@ -26,8 +27,8 @@ public class AudioPlayer : MonoBehaviour
     }
 
     public void failSFX(){
-        sfxSource.pitch = 1f; ;
-        sfxSource.PlayOneShot(fail);
+        failSFXSource.pitch = 1f; 
+        failSFXSource.PlayOneShot(fail);
     }
 
     public void litSFX(){

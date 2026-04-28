@@ -9,7 +9,6 @@ public class CameraFollow : MonoBehaviour
     private bool isRewinding = false;
     private bool isFrozen = false;
 
-
     void Awake()
     {
         initialPosition = transform.position;

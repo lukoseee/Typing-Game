@@ -18,7 +18,8 @@ public class Typer : MonoBehaviour
     [SerializeField] private Boy boy = null;
     [SerializeField] private AudioPlayer audioPlayer = null;
     [SerializeField] private Stopwatch stopwatch = null;
-    
+    [SerializeField] private WordBank wordBank = null;
+
     private string currentSentence = null;
     private int typedCount = 0;
     private int correctCharCount = 0;
@@ -44,7 +45,8 @@ public class Typer : MonoBehaviour
     }
 
     private void updateDisplay()
-    {
+    {   
+
         string typed = currentSentence.Substring(0, typedCount);
         string remaining = currentSentence.Substring(typedCount);
 
@@ -82,6 +84,28 @@ public class Typer : MonoBehaviour
             string nextLetter = remaining[0].ToString();
             string restRemaining = remaining.Substring(1);
 
+            // Apply masking to the next letter (typedCount is its index in currentSentence)
+            if (wordBank != null && wordBank.IsMaskedAt(typedCount))
+            {
+                nextLetter = "_";
+            }
+
+            // Apply masking to the rest, character by character
+            System.Text.StringBuilder maskedRest = new System.Text.StringBuilder();
+            for (int i = 0; i < restRemaining.Length; i++)
+            {
+                int globalIndex = typedCount + 1 + i;
+                if (wordBank != null && wordBank.IsMaskedAt(globalIndex))
+                {
+                    maskedRest.Append('_');
+                }
+                else
+                {
+                    maskedRest.Append(restRemaining[i]);
+                }
+            }
+            restRemaining = maskedRest.ToString();
+
             if (hasGuidingLight)
             {
                 if (nextLetter == " ")
@@ -98,6 +122,8 @@ public class Typer : MonoBehaviour
         }
 
         wordOutput.text = displayText;
+
+        gameController.ReapplyFadeIfActive();
     }
 
     private void checkInput()

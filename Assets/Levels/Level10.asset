@@ -10,22 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 297ba3bd92d6b26b9b7210c5bbc3dc1b, type: 3}
-  m_Name: Level7
+  m_Name: Level10
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   sentences:
-  - '''Get out of here, baldy!'' they said. ''Get out of here, baldy!'''
-  - He turned around,
-  - and cursed them in the name of the LORD.
-  timeLimit: 4
-  message: 'Level 7 - Combinations '
+  - Then I saw an angel coming down from heaven,
+  - holding in his hand the key to the bottomless pit
+  - who is the devil and Satan,
+  - and bound him for a thousand years,
+  - and threw him into the pit,
+  - and shut it and sealed it over him.
+  timeLimit: 3
+  message: Level 10 - Fading Scripture
   backgroundMusic: {fileID: 8300000, guid: cd2ae6c0c073a49429fedb18cb4c83a5, type: 3}
   ranksThresholds:
   - 50
   - 55
   - 65
-  graceEarned: 3
+  graceEarned: 5
   baseGraceAwarded: 1
   highestRankAwarded: 0
-  visualChallenge: 0
+  visualChallenge: 3
   maskMarker: 42
   fadeWordMarker: 126

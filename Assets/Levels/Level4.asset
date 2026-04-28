@@ -16,7 +16,7 @@ MonoBehaviour:
   - for our wrestling is not against flesh and blood
   - but against principalities and power
   - against the rulers of the world of this darkness
-  timeLimit: 4
+  timeLimit: 4.5
   message: level 4 - Longer and Faster
   backgroundMusic: {fileID: 8300000, guid: 565f933295453db3e8dec7559feddf9c, type: 3}
   ranksThresholds:
@@ -25,4 +25,7 @@ MonoBehaviour:
   - 65
   graceEarned: 2
   baseGraceAwarded: 1
-  highestRankAwarded: 1
+  highestRankAwarded: 0
+  visualChallenge: 0
+  maskMarker: 42
+  fadeWordMarker: 126

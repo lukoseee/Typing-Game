@@ -1,5 +1,14 @@
 using UnityEngine;
 
+public enum VisualChallenge
+{
+    None,
+    MissingLetters,
+    FadingWords,
+    FadingSentences
+}
+
+
 [CreateAssetMenu(fileName = "LevelData", menuName = "Scriptable Objects/LevelData")]
 public class LevelData : ScriptableObject
 {
@@ -12,6 +21,12 @@ public class LevelData : ScriptableObject
 
     [SerializeField] private bool baseGraceAwarded = false;
     [SerializeField] private Rank highestRankAwarded = Rank.None;
+
+    public VisualChallenge visualChallenge = VisualChallenge.None;
+
+    public char maskMarker = '*';
+
+    public char fadeWordMarker = '~';
 
     public bool HasBaseGraceBeenAwarded()
     {

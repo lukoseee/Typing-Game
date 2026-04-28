@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class CandleController : MonoBehaviour
 {   
-
     private List<Candle> candles = new List<Candle>();
     [SerializeField] private int spacing = 2;
     [SerializeField] private float initialX = -8.191f;

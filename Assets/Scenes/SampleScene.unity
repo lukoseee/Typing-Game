@@ -1726,6 +1726,7 @@ GameObject:
   - component: {fileID: 266007084}
   - component: {fileID: 266007086}
   - component: {fileID: 266007087}
+  - component: {fileID: 266007088}
   m_Layer: 0
   m_Name: AudioPlayer
   m_TagString: Untagged
@@ -1747,6 +1748,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   audioSource: {fileID: 266007086}
   sfxSource: {fileID: 266007087}
+  failSFXSource: {fileID: 266007088}
   fail: {fileID: 8300000, guid: e7883852b016354829ef3f633e4eed11, type: 3}
   lit: {fileID: 8300000, guid: ede572828e9336738b45fce9e7240d87, type: 3}
   pitch: 0.03
@@ -1878,6 +1880,103 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 0.5
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!82 &266007088
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 266007083}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -2180,7 +2279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 542fead5c95716817aa3140284731f81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  moveSpeed: 15
+  moveSpeed: 25
   initialPosition: {x: -10.075, y: -12, z: -0.44}
   candleController: {fileID: 1675604975}
   gameController: {fileID: 1442421797}
@@ -3116,12 +3215,11 @@ MonoBehaviour:
   gameController: {fileID: 1442421797}
   remainingColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
   failedColor: {r: 1, g: 0, b: 0, a: 1}
-  wordBank: {fileID: 1843976879}
   timerBar: {fileID: 1197757921}
-  candleController: {fileID: 1675604975}
   boy: {fileID: 334547391}
   audioPlayer: {fileID: 266007084}
   stopwatch: {fileID: 1532916811}
+  wordBank: {fileID: 1843976879}
 --- !u!1 &681473961
 GameObject:
   m_ObjectHideFlags: 0
@@ -5211,6 +5309,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f2ddef1f0b6da313b84f998ead78eb05, type: 2}
   - {fileID: 11400000, guid: ef1e179c997ab2e8488cf1048e211452, type: 2}
   - {fileID: 11400000, guid: 8226a2aec9582ba6b84923a648ba178f, type: 2}
+  - {fileID: 11400000, guid: f75e3ece6b16e013e852e92e2f886c22, type: 2}
   - {fileID: 11400000, guid: 16da9a5f584a7f88692b956ba927c21e, type: 2}
   levelDisplay: {fileID: 23127536}
   candleController: {fileID: 1675604975}
@@ -5220,8 +5319,9 @@ MonoBehaviour:
   restartMessage: {fileID: 1513415069}
   audioPlayer: {fileID: 266007084}
   endLevelPopup: {fileID: 1105324133}
-  stopwatch: {fileID: 1532916811}
   wordOutput: {fileID: 2092950143}
+  textFade: {fileID: 2057482531}
+  stopwatch: {fileID: 1532916811}
 --- !u!4 &1442421798
 Transform:
   m_ObjectHideFlags: 0
@@ -5704,6 +5804,8 @@ MonoBehaviour:
   candlePrefab: {fileID: -1361677996285674124, guid: ab3531d695e9199cbafef33346f852cf, type: 3}
   candleParent: {fileID: 1789031428}
   gameController: {fileID: 1442421797}
+  height: -11.217
+  zPos: 80.738
 --- !u!4 &1675604976
 Transform:
   m_ObjectHideFlags: 0
@@ -6540,6 +6642,53 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2009323565}
   m_CullTransparentMesh: 1
+--- !u!1 &2057482530
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2057482532}
+  - component: {fileID: 2057482531}
+  m_Layer: 0
+  m_Name: FadesManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2057482531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2057482530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2efe2d81ddbfd5c81bfbb26d6fb9c0f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  wordOutput: {fileID: 2092950143}
+  wordBank: {fileID: 1843976879}
+  currentFadeAlpha: 1
+--- !u!4 &2057482532
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2057482530}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.34833, y: -8.70557, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2067361065 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3675163783208288102, guid: e0d63873623c7490ba031a45ef79882b, type: 3}
@@ -7380,3 +7529,4 @@ SceneRoots:
   - {fileID: 266007085}
   - {fileID: 1532916812}
   - {fileID: 32577641}
+  - {fileID: 2057482532}

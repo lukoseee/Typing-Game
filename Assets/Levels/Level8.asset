@@ -13,18 +13,21 @@ MonoBehaviour:
   m_Name: Level8
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   sentences:
-  - I am the resurrection and the life.
-  - The one who believes in me will live
-  - ', even though they die;'
-  - and whoever lives by believing in me will never die.
-  - Do you believe this?
-  timeLimit: 3
-  message: Level 8 - Swaying Scripture
+  - I am th*e resurrection *and the life.
+  - The one who beli*eves in me will live
+  - ', even th*ough th*ey die;'
+  - and whoe*ver lives by beli*eving in me will never die.
+  - Do y*ou bel*i*eve this?
+  timeLimit: 4
+  message: Level 8 - Missing scripture
   backgroundMusic: {fileID: 8300000, guid: 565f933295453db3e8dec7559feddf9c, type: 3}
   ranksThresholds:
   - 55
   - 60
   - 70
-  graceEarned: 3
-  baseGraceAwarded: 0
+  graceEarned: 4
+  baseGraceAwarded: 1
   highestRankAwarded: 0
+  visualChallenge: 1
+  maskMarker: 42
+  fadeWordMarker: 126

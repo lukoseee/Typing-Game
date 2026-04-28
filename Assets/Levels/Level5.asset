@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: Level5
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   sentences:
-  - 'Deliver me from mine enemies '
+  - Deliver me from mine enemies
   - O my God
   - Defend me from them that rise up against me
   - The mighty are gathered against me
   - Deliver me from the workers of iniquity
   - and save me from bloody men
-  timeLimit: 6
+  timeLimit: 5
   message: Level 5 - Capital and Lowercase
   backgroundMusic: {fileID: 8300000, guid: 70178e838a5bcc029962d01ac7585777, type: 3}
   ranksThresholds:
@@ -29,3 +29,6 @@ MonoBehaviour:
   graceEarned: 3
   baseGraceAwarded: 1
   highestRankAwarded: 0
+  visualChallenge: 0
+  maskMarker: 42
+  fadeWordMarker: 126

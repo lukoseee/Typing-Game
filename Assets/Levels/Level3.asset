@@ -16,7 +16,7 @@ MonoBehaviour:
   - for hardship does not spring from the soil
   - nor does trouble sprout from the ground
   - yet man is born to trouble
-  timeLimit: 3
+  timeLimit: 3.5
   message: level 3 - Getting Faster
   backgroundMusic: {fileID: 8300000, guid: 565f933295453db3e8dec7559feddf9c, type: 3}
   ranksThresholds:
@@ -25,4 +25,7 @@ MonoBehaviour:
   - 65
   graceEarned: 2
   baseGraceAwarded: 1
-  highestRankAwarded: 2
+  highestRankAwarded: 0
+  visualChallenge: 0
+  maskMarker: 42
+  fadeWordMarker: 126
