@@ -153,8 +153,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 43.89502, y: 0.63501}
-  m_SizeDelta: {x: 32.65, y: 38.94}
+  m_AnchoredPosition: {x: 40.4, y: 0.63501}
+  m_SizeDelta: {x: 25.66, y: 38.94}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &23127536
 MonoBehaviour:
@@ -3220,8 +3220,6 @@ MonoBehaviour:
   audioPlayer: {fileID: 266007084}
   stopwatch: {fileID: 1532916811}
   wordBank: {fileID: 1843976879}
-  popupPrefab: {fileID: 1070696659195761890, guid: 3d008536960a43e8cb5d7432ced237b4, type: 3}
-  popupParent: {fileID: 1493898163}
 --- !u!1 &681473961
 GameObject:
   m_ObjectHideFlags: 0

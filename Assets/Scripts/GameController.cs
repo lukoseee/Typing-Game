@@ -39,6 +39,8 @@ public class GameController : MonoBehaviour
         LevelData level = getCurrentLevelData();
 
         StopAllVisualChallenges();
+        candleController.StopBlowOut();
+        restartMessage.StopFade();
 
         switch (level.visualChallenge)
         {
@@ -72,7 +74,7 @@ public class GameController : MonoBehaviour
         levelDisplay.text = $"{index + 1}";
 
         restartMessage.SetMessage(level.message);
-        StartCoroutine(restartMessage.FadeInAndOut());
+        restartMessage.StartFadeInAndOut();
 
 
         desk.ResizeDesk(wordBank.wordCount(), candleController.GetSpacing());
@@ -107,7 +109,7 @@ public class GameController : MonoBehaviour
         }
 
         textRectTransform = wordOutput.GetComponent<RectTransform>();
-        currentLevelIndex = 0;
+        currentLevelIndex = 9;
         StartLevel(currentLevelIndex);
         audioPlayer.PlayMusic(levels[currentLevelIndex]);
         loadNextSentence();
@@ -216,7 +218,7 @@ public class GameController : MonoBehaviour
         {
             isBlowingOut = true;
             mainCamera.StartRewind();
-            StartCoroutine(candleController.BlowOutAll());
+            candleController.StartBlowOutAll();
         }
 
     }

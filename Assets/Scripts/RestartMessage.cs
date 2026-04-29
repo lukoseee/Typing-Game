@@ -10,6 +10,8 @@ public class RestartMessage : MonoBehaviour
     [SerializeField] private float displayDuration = 2f;
     [SerializeField] private float fadeOutDuration = 1f;
 
+    private Coroutine fadeCoroutine;
+
     void Start()
     {
         Hide();
@@ -28,7 +30,7 @@ public class RestartMessage : MonoBehaviour
         SetAlpha(1f);
     }
 
-    public void Hide()
+    private void Hide()
     {
         SetAlpha(0f);
     }
@@ -38,15 +40,15 @@ public class RestartMessage : MonoBehaviour
         messageText.text = newMessage;
     }
 
-    public IEnumerator FadeIn(){
+    private IEnumerator FadeIn(){
         yield return FadeText(messageText, 0f, 1f, fadeInDuration);
     }
 
-    public IEnumerator FadeOut(){
+    private IEnumerator FadeOut(){
         yield return FadeText(messageText, 1f, 0f, fadeOutDuration);
     }
 
-    public IEnumerator FadeInAndOut()
+    private IEnumerator FadeInAndOut()
     {
         yield return FadeIn();
         
@@ -55,7 +57,7 @@ public class RestartMessage : MonoBehaviour
         yield return FadeOut();
     }
 
-    public IEnumerator FadeText(Text textComponent, float startAlpha, float endAlpha, float duration)
+    private IEnumerator FadeText(Text textComponent, float startAlpha, float endAlpha, float duration)
     {
         float elapsed = 0f;
         while (elapsed < duration)
@@ -70,4 +72,20 @@ public class RestartMessage : MonoBehaviour
         finalColor.a = endAlpha;
         textComponent.color = finalColor;
     }
+
+    public void StartFadeInAndOut()
+    {
+        if (fadeCoroutine != null) StopCoroutine(fadeCoroutine);
+        fadeCoroutine = StartCoroutine(FadeInAndOut());
+    }
+
+    public void StopFade()
+    {
+        if (fadeCoroutine != null)
+        {
+            StopCoroutine(fadeCoroutine);
+            fadeCoroutine = null;
+        }
+    }
+
 }

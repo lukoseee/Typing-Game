@@ -13,6 +13,8 @@ public class CandleController : MonoBehaviour
     [SerializeField] private float height = -11.217f;
     [SerializeField] private float zPos = 80.7380f;
 
+    private Coroutine blowOutRoutine;
+
     public void lightNextCandle(int index)
     {   
         if(index >= candles.Count)
@@ -74,6 +76,21 @@ public class CandleController : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
         }
 
+    }
+
+    public void StartBlowOutAll()
+    {
+        if (blowOutRoutine != null) StopCoroutine(blowOutRoutine);
+        blowOutRoutine = StartCoroutine(BlowOutAll());
+    }
+
+    public void StopBlowOut()
+    {
+        if (blowOutRoutine != null)
+        {
+            StopCoroutine(blowOutRoutine);
+            blowOutRoutine = null;
+        }
     }
 
     public int GetSpacing()

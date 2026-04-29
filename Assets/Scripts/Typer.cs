@@ -19,6 +19,8 @@ public class Typer : MonoBehaviour
     [SerializeField] private AudioPlayer audioPlayer = null;
     [SerializeField] private Stopwatch stopwatch = null;
     [SerializeField] private WordBank wordBank = null;
+    [SerializeField] private PowerupPopup popupPrefab;
+    [SerializeField] private Transform popupParent;
 
     private string currentSentence = null;
     private int typedCount = 0;
@@ -134,6 +136,7 @@ public class Typer : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha2) && gameController.SacredPause())
         {   
             ActivateSacredPause();
+            PowerupPopup.Spawn(popupPrefab, popupParent, "SacredPause");
             return;
         }
 
@@ -204,6 +207,7 @@ public class Typer : MonoBehaviour
             {
                 Debug.Log("Mistake ignored!");
                 audioPlayer.failSFX();
+                PowerupPopup.Spawn(popupPrefab, popupParent, "ForgivingFlame");
                 updateDisplay();
                 return;
             }

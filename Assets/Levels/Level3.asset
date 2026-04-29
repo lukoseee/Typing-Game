@@ -24,7 +24,7 @@ MonoBehaviour:
   - 55
   - 65
   graceEarned: 2
-  baseGraceAwarded: 1
+  baseGraceAwarded: 0
   highestRankAwarded: 0
   visualChallenge: 0
   maskMarker: 42
