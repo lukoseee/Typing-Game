@@ -17,16 +17,16 @@ MonoBehaviour:
   - who ~trains my hands for war,
   - Send forth ~lightning and scatter the enemies;
   - shoot ~your ~arrows and rout them.
-  timeLimit: 4
+  timeLimit: 3.5
   message: Level 9 - Fading Words
   backgroundMusic: {fileID: 8300000, guid: cd2ae6c0c073a49429fedb18cb4c83a5, type: 3}
   ranksThresholds:
-  - 40
   - 50
+  - 55
   - 60
   graceEarned: 4
   baseGraceAwarded: 1
-  highestRankAwarded: 0
+  highestRankAwarded: 1
   visualChallenge: 2
   maskMarker: 42
   fadeWordMarker: 126

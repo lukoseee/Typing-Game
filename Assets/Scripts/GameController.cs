@@ -109,7 +109,7 @@ public class GameController : MonoBehaviour
         }
 
         textRectTransform = wordOutput.GetComponent<RectTransform>();
-        currentLevelIndex = 9;
+        currentLevelIndex = 0;
         StartLevel(currentLevelIndex);
         audioPlayer.PlayMusic(levels[currentLevelIndex]);
         loadNextSentence();
