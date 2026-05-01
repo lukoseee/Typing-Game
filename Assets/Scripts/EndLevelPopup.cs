@@ -9,29 +9,37 @@ public enum Rank
     Silver,
     Gold
 }
-
+//manages end level popup UI, displays results, calculates rank and grace rewards, and handles navigation to next level or upgrades screen
 public class EndLevelPopup : MonoBehaviour
 {   
-    [SerializeField] private GameObject root;  
+    [SerializeField] private GameObject root;
+
     [SerializeField] private Button retryButton;
     [SerializeField] private Button nextButton;
-    [SerializeField] private Text level;
-    [SerializeField] private Text completeText;
-    [SerializeField] private Text timer;
+
+    [SerializeField] private Text level; //current level number
+    [SerializeField] private Text completeText; //complete or failed text
+    [SerializeField] private Text timer; 
     [SerializeField] private Text WPM;
-    [SerializeField] private Image bronzeImage;
+
+    //rank image components
+    [SerializeField] private Image bronzeImage; 
     [SerializeField] private Image silverImage;
     [SerializeField] private Image goldImage;
+
+    //rank sprites 
     [SerializeField] private Sprite bronzeFull;
     [SerializeField] private Sprite silverFull;
     [SerializeField] private Sprite goldFull;
+    [SerializeField] private Sprite outline; //outline sprite for unearned ranks
 
     [SerializeField] private GameController gameController;
     [SerializeField] private Typer typer;
-    [SerializeField] private Sprite outline;
+    
     [SerializeField] private Text bronzeThreshold;
     [SerializeField] private Text silverThreshold;
     [SerializeField] private Text goldThreshold;
+
     [SerializeField] private Button upgradesButton;
     [SerializeField] private Upgrades upgrades;
     [SerializeField] private Text graceEarned;
@@ -46,8 +54,10 @@ public class EndLevelPopup : MonoBehaviour
         upgradesButton.onClick.AddListener(OnUpgradesClicked);
     }
 
-    public void DisplayRank(Rank rank)
-    {
+    private void DisplayRank(Rank rank)
+    {   
+        //update rank images based on earned rank 
+        //all ranks up to earned rank should be filled, others outlined
         if (rank >= Rank.Bronze)
             bronzeImage.sprite = bronzeFull;
 
@@ -65,12 +75,13 @@ public class EndLevelPopup : MonoBehaviour
         completeText.text = "Complete!";
 
         float wpmScore = CalculateWPM(typer.getCorrectCharCount(), gameController.stopwatch.GetTime());
-        WPM.text = wpmScore.ToString("F2");
+        WPM.text = wpmScore.ToString("F2"); //2 decimal places
         Rank rank = GetRank(wpmScore);
         DisplayRank(rank);
 
         LevelData levelData = gameController.getCurrentLevelData();
 
+        //grant grace for completing level if not already awarded, then grant bonus grace for rank if it's a new highest rank
         if (!levelData.HasBaseGraceBeenAwarded())
         {
             int baseGrace = levelData.graceEarned;
@@ -106,12 +117,15 @@ public class EndLevelPopup : MonoBehaviour
         ShowCommon();
         completeText.text = "Failed!";
         completeText.color = Color.red;
+
+        //disable next button on fail
         nextButton.gameObject.SetActive(false);
         ResetRankDisplay();
     }
 
-    public void ShowCommon()
-    {
+    //common setup for both win and fail states
+    private void ShowCommon()
+    {   
         root.SetActive(true);
         level.text = $"Level {gameController.getCurrentLevel()}";
         timer.text = gameController.stopwatch.GetTime().ToString("F2");
@@ -147,6 +161,7 @@ public class EndLevelPopup : MonoBehaviour
         return words / minutes;
     }
 
+    //determine rank based on score and thresholds defined in level data
     private Rank GetRank(float score)
     {   
         float[] thresholds = gameController.getCurrentLevelData().ranksThresholds;
@@ -163,6 +178,7 @@ public class EndLevelPopup : MonoBehaviour
         return Rank.None;
     }
 
+    //determine bonus based on rank
     private int GetBonusForRank(Rank rank)
     {
         switch (rank)

@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using TMPro;
 
+//manages various text fade in/out effects 
 public class TextFade : MonoBehaviour
 {
     [SerializeField] private TMP_Text wordOutput = null;
@@ -89,7 +90,7 @@ public class TextFade : MonoBehaviour
 
             if (!charInfo.isVisible)
             {
-                // Spaces and other invisible chars — use them as word separators
+                //spaces and other invisible chars, use them as word separators
                 if (inWord)
                 {
                     wordIndex++;
@@ -107,7 +108,7 @@ public class TextFade : MonoBehaviour
 
             Color32[] vertexColors = textInfo.meshInfo[matIndex].colors32;
 
-            // Each character has 4 vertices — set alpha on all of them
+            //each character has 4 vertices 
             vertexColors[vertIndex + 0].a = alphaByte;
             vertexColors[vertIndex + 1].a = alphaByte;
             vertexColors[vertIndex + 2].a = alphaByte;

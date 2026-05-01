@@ -2,7 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Powerup : MonoBehaviour
-{
+{   
+    //manages individual powerup UI elements and interactions for equipping and purchasing powerups
     [SerializeField] private Image icon;
     [SerializeField] private Button equipButton;
     [SerializeField] private Button buyButton;

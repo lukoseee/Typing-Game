@@ -15,10 +15,10 @@ public class GameController : MonoBehaviour
     [SerializeField] private Desk desk = null;
     [SerializeField] private Boy boy = null;
     [SerializeField] private CameraFollow mainCamera = null;
-    [SerializeField] private RestartMessage restartMessage = null;
+    [SerializeField] private RestartMessage restartMessage = null; //title of each level
     [SerializeField] private AudioPlayer audioPlayer = null;
     [SerializeField] private EndLevelPopup endLevelPopup = null;
-    [SerializeField] private TMP_Text wordOutput = null;
+    [SerializeField] private TMP_Text wordOutput = null; //where sentences come up
     [SerializeField] private TextFade textFade = null;
     public Stopwatch stopwatch = null;
 
@@ -38,10 +38,16 @@ public class GameController : MonoBehaviour
         
         LevelData level = getCurrentLevelData();
 
+        //stop fading words
         StopAllVisualChallenges();
+        
+        //stop blow out 
         candleController.StopBlowOut();
+        
+        //stop restart message fade 
         restartMessage.StopFade();
 
+        //start visual challenge based on level
         switch (level.visualChallenge)
         {
             case VisualChallenge.FadingSentences:
@@ -54,8 +60,11 @@ public class GameController : MonoBehaviour
                 break;
         }
 
+        //apply upgrades 
         ApplyForgivingFlame();
         ApplySacredPause();
+
+        //resets
         typer.resetCharCount();
         boy.ResetPosition();
 
@@ -64,15 +73,23 @@ public class GameController : MonoBehaviour
 
         candleController.SpawnCandles(wordBank.wordCount());
 
+        //all candles unlit
         candleController.ResetCandles();
         
+        //set WPM time limit based on level
         timerBar.SetDuration(level.timeLimit);
+
+        //timer for recording WPM score
         stopwatch.ResetTimer();
+
+        //reset WPM timer and puse until first key press
         timerBar.ResetTimer();
         timerBar.pauseTimer();
 
+        //level HUD at the top
         levelDisplay.text = $"{index + 1}";
 
+        //level message fades in
         restartMessage.SetMessage(level.message);
         restartMessage.StartFadeInAndOut();
 
@@ -87,13 +104,14 @@ public class GameController : MonoBehaviour
 
         Debug.Log($"Loading level {currentLevelIndex}...");
         if (currentLevelIndex >= levels.Count)
-        {
+        {   
+            //game finished
             restartMessage.SetMessage("Thanks for playing!");
             restartMessage.Show();
             Debug.Log("Game Complete!");
             return;
         }
-
+        
         audioPlayer.PlayMusic(levels[currentLevelIndex]);
         audioPlayer.resetSFX();
         StartLevel(currentLevelIndex);
@@ -104,7 +122,8 @@ public class GameController : MonoBehaviour
     private void Start()
     {   
         foreach (LevelData level in levels)
-        {
+        {   
+            //reset grace and rank earned for each level at start of game
             level.ResetForNewGame();
         }
 
@@ -177,6 +196,7 @@ public class GameController : MonoBehaviour
         string sentence = wordBank.getWord();
 
         LevelData level = getCurrentLevelData();
+        //apply visual challenge parsing based on level
         if (level.visualChallenge == VisualChallenge.MissingLetters)
         {
             sentence = wordBank.ParseMaskedSentence(sentence, level.maskMarker);
@@ -213,7 +233,7 @@ public class GameController : MonoBehaviour
 
     private void checkRestart()
     {   
-
+        //start blow out and rewind
         if (!isBlowingOut)
         {
             isBlowingOut = true;
@@ -222,7 +242,8 @@ public class GameController : MonoBehaviour
         }
 
     }
-
+    
+    //check if timer ran out 
     private void checkTimer()
     {
         if (timerBar.isTimerExpired() && !hasFailedAlready)
@@ -272,7 +293,7 @@ public class GameController : MonoBehaviour
 
 
     private void StopAllVisualChallenges()
-    {
+    {   //stop active visual challenges
         if (fadeCoroutine != null)
         {
             StopCoroutine(fadeCoroutine);
@@ -284,7 +305,8 @@ public class GameController : MonoBehaviour
             fadeWordsCoroutine = null;
         }
         textFade.currentFadeAlpha = 1f;
-
+        
+        //reset text alpha to fully visible
         if (wordOutput != null)
         {
             Color c = wordOutput.color;
@@ -294,6 +316,7 @@ public class GameController : MonoBehaviour
         }
     }
 
+    //called by text fade to reapply alpha to words that may have changed due to player input
     public void ReapplyFadeIfActive()
     {
         if (fadeWordsCoroutine != null)

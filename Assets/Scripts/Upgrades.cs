@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
+//ui and logic for upgrades
 public class Upgrades : MonoBehaviour
 {   
     public static Upgrades Instance { get; private set; }
@@ -14,7 +15,7 @@ public class Upgrades : MonoBehaviour
 
 
     private Dictionary<PowerupType, int[]> powerupCosts = new Dictionary<PowerupType, int[]>
-    {
+    {   //cost of powerups and upgrades
         { PowerupType.ForgivingFlame, new int[] { 4, 5, 6 } },
         { PowerupType.SacredPause, new int[] { 4, 5, 6 } },
         { PowerupType.InkOfConviction, new int[] { 1, 0, 0 } }, 
@@ -22,7 +23,7 @@ public class Upgrades : MonoBehaviour
     };
 
     private Dictionary<PowerupType, int> powerupLevels = new Dictionary<PowerupType, int>();
-    private HashSet<PowerupType> purchasedPowerups = new HashSet<PowerupType>();
+    private HashSet<PowerupType> purchasedPowerups = new HashSet<PowerupType>(); //track which powerups bought
     private int maxEquipped = 2;
     private PowerupType[] equippedPowerups = new PowerupType[2];
     private Dictionary<PowerupType, bool> isEquipped = new Dictionary<PowerupType, bool>();
@@ -45,7 +46,8 @@ public class Upgrades : MonoBehaviour
         {
             equippedPowerups[i] = PowerupType.None;
         }
-
+        
+        //reset on start of game
         powerupLevels[PowerupType.ForgivingFlame] = 0;
         powerupLevels[PowerupType.SacredPause] = 0;
         powerupLevels[PowerupType.InkOfConviction] = 0;
@@ -79,13 +81,17 @@ public class Upgrades : MonoBehaviour
 
     public bool IsMaxLevel(PowerupType powerupType)
     {   
+        //check if already purchased and upgradable
         if (!IsUpgradable(powerupType) && IsPowerupPurchased(powerupType))
         {
             return true; 
         }
+
+        //check if upgradable and at max level
         return GetPowerupLevel(powerupType) >= 3;
     }
 
+    //buy and upgrade powerup
     public bool BuyPowerup(PowerupType powerupType)
     {
         int currentLevel = GetPowerupLevel(powerupType);
@@ -112,18 +118,21 @@ public class Upgrades : MonoBehaviour
     }
 
     public void EquipPowerup(Sprite powerupIcon, PowerupType powerupType)
-    {
+    {   
+        //if already equipped, unequip
         if (isEquipped.ContainsKey(powerupType) && isEquipped[powerupType])
         {
             UnequipPowerup(powerupType);
             return;
         }
 
+        //if both slots full, unequip first slot to make room
         if (equipmentSlots[0].sprite != null && equipmentSlots[1].sprite != null)
         {
             UnequipPowerup(equippedPowerups[0]);
         }
 
+        //equip in first available slot
         if (equipmentSlots[0].sprite == null)
         {
             equipmentSlots[0].sprite = powerupIcon;
@@ -149,6 +158,7 @@ public class Upgrades : MonoBehaviour
                 equipmentSlots[i].sprite = null;
                 equipmentSlots[i].color = new Color32(26, 20, 40, 255);
                 
+                //create outline on image to indicate empty slot
                 Outline outline = equipmentSlots[i].GetComponent<Outline>();
                 outline.effectColor = new Color32(147, 112, 219, 255); 
                 

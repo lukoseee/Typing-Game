@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//stopwatch timer for tracking time in levels
 public class Stopwatch : MonoBehaviour
 {   
     private bool timerActive;

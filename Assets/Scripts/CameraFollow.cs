@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//manages camera movement to follow the player
 public class CameraFollow : MonoBehaviour
 {   
     [SerializeField] private Transform target;
@@ -16,6 +17,7 @@ public class CameraFollow : MonoBehaviour
 
     void LateUpdate(){
         
+        //sling camera back to start
         if(isRewinding){
             transform.position = Vector3.Lerp(
                 transform.position,

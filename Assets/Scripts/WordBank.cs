@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
+
+//manages the sentences and words for each level
 public class WordBank : MonoBehaviour
 {   
     private List<string> workingSentences = new List<string>();
@@ -32,6 +34,7 @@ public class WordBank : MonoBehaviour
 
     }
 
+    //for missing letters
     public string ParseMaskedSentence(string raw, char marker)
     {
         StringBuilder clean = new StringBuilder();
@@ -41,12 +44,11 @@ public class WordBank : MonoBehaviour
         {
             if (raw[i] == marker)
             {
-                // The next character (if any) is masked
                 if (i + 1 < raw.Length)
                 {
                     clean.Append(raw[i + 1]);
                     mask.Add(true);
-                    i++; // skip the marked character since we just consumed it
+                    i++; 
                 }
             }
             else

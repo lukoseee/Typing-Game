@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//candle prefab
 public class Candle : MonoBehaviour
 {   
     private Animator animator = null;

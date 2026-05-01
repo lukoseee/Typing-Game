@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 
+//manages player's grace currency, allows other scripts to check balance, spend, and earn grace, and notifies listeners of changes to grace amount
 public class GraceManager : MonoBehaviour
 {   
     public static GraceManager Instance { get; private set; }
@@ -35,7 +36,7 @@ public class GraceManager : MonoBehaviour
             return false;
 
         graceAmount -= amount;
-        OnGraceChanged?.Invoke(graceAmount);
+        OnGraceChanged?.Invoke(graceAmount); //notify listeners of change
         return true;
     }
 

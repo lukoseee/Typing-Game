@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+//timer on the bottom right of the scene, resets on each word correct 
 public class TimerBar : MonoBehaviour
 {
     [SerializeField] private Image timerImage;

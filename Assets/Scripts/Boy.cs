@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
+//boy character controller, moves to candles
 public class Boy : MonoBehaviour
 {   
     [SerializeField] private float moveSpeed = 5f;
@@ -34,6 +35,8 @@ public class Boy : MonoBehaviour
         targetPosition = new Vector3(candlePos.x, transform.position.y, transform.position.z);
 
         isMoving = true;
+        
+        //trigger walking animation
         animator.SetBool("isWalking", true);
     }
 

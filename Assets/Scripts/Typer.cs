@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+//all logic related to player typing 
 public class Typer : MonoBehaviour
 {  
     [SerializeField] private float shakeDuration = 0.2f;
@@ -23,8 +24,8 @@ public class Typer : MonoBehaviour
     [SerializeField] private Transform popupParent;
 
     private string currentSentence = null;
-    private int typedCount = 0;
-    private int correctCharCount = 0;
+    private int typedCount = 0; //no of chars typed so far
+    private int correctCharCount = 0; //for calculating WPM
     private bool isPaused = false;
     private bool firstKeyPress = false;
     private Vector2 originalPosition;
@@ -72,7 +73,7 @@ public class Typer : MonoBehaviour
                 }
                 else
                 {
-                    styledTyped += $"<size=120%>{c}</size>";
+                    styledTyped += $"<size=120%>{c}</size>"; //typed letters are slightly bigger
                 }
             }
 
@@ -86,13 +87,13 @@ public class Typer : MonoBehaviour
             string nextLetter = remaining[0].ToString();
             string restRemaining = remaining.Substring(1);
 
-            // Apply masking to the next letter (typedCount is its index in currentSentence)
+            //apply masking to the next letter (typedCount is its index in currentSentence)
             if (wordBank != null && wordBank.IsMaskedAt(typedCount))
             {
                 nextLetter = "_";
             }
 
-            // Apply masking to the rest, character by character
+            //apply masking to the rest, character by character
             System.Text.StringBuilder maskedRest = new System.Text.StringBuilder();
             for (int i = 0; i < restRemaining.Length; i++)
             {
@@ -116,7 +117,7 @@ public class Typer : MonoBehaviour
                 }
                 else
                 {
-                    nextLetter = $"<color=#FFFF00><u>{nextLetter}</u></color>";
+                    nextLetter = $"<color=#FFFF00><u>{nextLetter}</u></color>"; //next letter highlighted and underlined
                 }
             }
 
@@ -132,7 +133,8 @@ public class Typer : MonoBehaviour
     {       
         if (gameController.getFailed())
             return;
-            
+        
+        //activate sacred pause powerup on 2 key press, if available
         if (Input.GetKeyDown(KeyCode.Alpha2) && gameController.SacredPause())
         {   
             ActivateSacredPause();
@@ -140,6 +142,7 @@ public class Typer : MonoBehaviour
             return;
         }
 
+        //only start timer on first press
         if (Input.anyKeyDown && !firstKeyPress)
         {   
             timerBar.resumeTimer();
@@ -156,6 +159,7 @@ public class Typer : MonoBehaviour
 
     }
 
+    //decrement usage and pause timer
     private void ActivateSacredPause(){
 
         if (isPaused)
@@ -182,8 +186,10 @@ public class Typer : MonoBehaviour
                 audioPlayer.litSFX();
                 Debug.Log("boy moving to candle index: " + gameController.getCurrentCandleIndex());
 
+                //move to next candle 
                 gameController.incCurrentCandleIndex();
                 
+                //resume timer if word is complete after using sacred pause
                 if (isPaused)
                 {   
                     Debug.Log("Resuming from Sacred Pause.");
@@ -202,11 +208,12 @@ public class Typer : MonoBehaviour
 
         } else 
         {   
-            
+            //check if player has forgiving flame  
             if (gameController.ShouldIgnoreMistake())
             {
                 Debug.Log("Mistake ignored!");
                 audioPlayer.failSFX();
+                //powerup icon popup
                 PowerupPopup.Spawn(popupPrefab, popupParent, "ForgivingFlame");
                 updateDisplay();
                 return;
@@ -227,6 +234,7 @@ public class Typer : MonoBehaviour
         return (typedCount) >= currentSentence.Length;
     }
 
+    //slighty shake the text on mistake
     private IEnumerator ShakeText()
     {
         float elapsed = 0f;
@@ -247,9 +255,11 @@ public class Typer : MonoBehaviour
 
     private bool isWordComplete()
     {   
+        //if finished level
         if (typedCount >= currentSentence.Length)
             return true;
-
+            
+        //if next char is space, consider word complete 
         return currentSentence[typedCount] == ' ';
     }
 

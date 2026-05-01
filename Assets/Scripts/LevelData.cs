@@ -8,7 +8,7 @@ public enum VisualChallenge
     FadingSentences
 }
 
-
+//scriptable object to hold level data and track player progress on each level for grace rewards and rank achievements
 [CreateAssetMenu(fileName = "LevelData", menuName = "Scriptable Objects/LevelData")]
 public class LevelData : ScriptableObject
 {
@@ -19,14 +19,14 @@ public class LevelData : ScriptableObject
     public float[] ranksThresholds;
     public int graceEarned;
 
-    [SerializeField] private bool baseGraceAwarded = false;
-    [SerializeField] private Rank highestRankAwarded = Rank.None;
+    [SerializeField] private bool baseGraceAwarded = false; //to track if player has already earned the base grace for completing the level, prevents farming grace by replaying levels
+    [SerializeField] private Rank highestRankAwarded = Rank.None; //to track highest rank player has achieved on this level
 
     public VisualChallenge visualChallenge = VisualChallenge.None;
 
-    public char maskMarker = '*';
+    public char maskMarker = '*'; //for missing letters challenge
 
-    public char fadeWordMarker = '~';
+    public char fadeWordMarker = '~'; //for fading words challenge
 
     public bool HasBaseGraceBeenAwarded()
     {

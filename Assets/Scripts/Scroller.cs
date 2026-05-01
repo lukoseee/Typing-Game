@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+//background scroller for parallax effect when camera moves
 public class Scroller : MonoBehaviour
 {   
     [SerializeField] private RawImage img;

@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//manages the desk object in the scene, resizing it based on the number of candles and spacing
 public class Desk : MonoBehaviour
 {   
     [SerializeField] private Transform middle;
@@ -12,6 +13,7 @@ public class Desk : MonoBehaviour
         baseMiddleWidth = middle.GetComponent<SpriteRenderer>().bounds.size.x;
     }
 
+    //spawn table size based on candle count and spacings
     public void ResizeDesk(int candleCount, int spacing){
 
         float width = (candleCount - 1) * spacing;

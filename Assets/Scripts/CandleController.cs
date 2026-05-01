@@ -2,10 +2,11 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
+//manages the candles in the scene
 public class CandleController : MonoBehaviour
 {   
     private List<Candle> candles = new List<Candle>();
-    [SerializeField] private int spacing = 2;
+    [SerializeField] private int spacing = 2; //spacing between candles on table
     [SerializeField] private float initialX = -8.191f;
     [SerializeField] private Candle candlePrefab;
     [SerializeField] private Transform candleParent;
@@ -20,6 +21,7 @@ public class CandleController : MonoBehaviour
         if(index >= candles.Count)
                 return;
 
+        //light animation
         candles[index].Light();
         Debug.Log($"Lit candle {index} of {candles.Count}");
 
@@ -28,20 +30,23 @@ public class CandleController : MonoBehaviour
     public void ResetCandles()
     {   
         
-
         for (int i = 0; i < candles.Count; i++)
-        {
+        {   
+            //unlit
             candles[i].ResetCandle();
         }
     }
 
+    //spawn candles at interval on table
     public void SpawnCandles(int count)
-    {
+    {   
+        //clear existing candles
         foreach (var c in candles)
         {
             if (c != null) Destroy(c.gameObject);
         }
 
+        //clear list
         candles.Clear();
 
         for (int i = 0; i < count; i++)
@@ -70,9 +75,11 @@ public class CandleController : MonoBehaviour
     {   
         
         for (int i = gameController.getCurrentCandleIndex() - 1; i >= 0; i--)
-        {
+        {   
+            //blow out animation
             candles[i].BlowOut();
 
+            //staggered effect blows one by one
             yield return new WaitForSeconds(0.2f);
         }
 

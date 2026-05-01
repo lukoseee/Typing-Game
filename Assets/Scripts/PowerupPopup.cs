@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
+//Powerup icon popups when used.
 public class PowerupPopup : MonoBehaviour
 {
     [SerializeField] private Image iconImage;
@@ -48,7 +49,7 @@ public class PowerupPopup : MonoBehaviour
         SetAlpha(0f);
         transform.localScale = Vector3.one * startScale;
 
-        // Pop in
+        // pop in
         while (elapsed < popDuration)
         {
             float t = elapsed / popDuration;
@@ -64,7 +65,7 @@ public class PowerupPopup : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(holdDuration);
 
-        // Fade out
+        // fade out
         elapsed = 0f;
         while (elapsed < fadeDuration)
         {

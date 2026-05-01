@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
+//manages the message at the start of level with fade in/out animation
 public class RestartMessage : MonoBehaviour
 {
     [SerializeField] private Text messageText;
