@@ -20,7 +20,6 @@ public class AudioPlayer : MonoBehaviour
 
         sfxSource.pitch = initialPitch;
         audioSource.loop = true;
-
     }
 
     //bg music

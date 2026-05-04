@@ -24,6 +24,8 @@ public class TimerBar : MonoBehaviour
             timeLeft -= Time.deltaTime;
 
             float fill = timeLeft / duration;
+            
+            //visually update the timer bar every frame
             timerImage.fillAmount = fill;
         }
     }

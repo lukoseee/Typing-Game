@@ -5,7 +5,7 @@ using System.Collections.Generic;
 //manages the candles in the scene
 public class CandleController : MonoBehaviour
 {   
-    private List<Candle> candles = new List<Candle>();
+    private List<Candle> candles = new List<Candle>(); //all candles on the table (corresponds to words in level)
     [SerializeField] private int spacing = 2; //spacing between candles on table
     [SerializeField] private float initialX = -8.191f;
     [SerializeField] private Candle candlePrefab;
@@ -79,7 +79,7 @@ public class CandleController : MonoBehaviour
             //blow out animation
             candles[i].BlowOut();
 
-            //staggered effect blows one by one
+            //staggered effect blows one by one from right to left
             yield return new WaitForSeconds(0.2f);
         }
 

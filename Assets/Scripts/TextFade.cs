@@ -5,7 +5,6 @@ using TMPro;
 
 public static class FadeUtil
 {
-    // Lerps from startAlpha to endAlpha over duration, calling apply(alpha) each frame.
     public static IEnumerator Lerp(float startAlpha, float endAlpha, float duration, Action<float> apply)
     {
         float elapsed = 0f;
@@ -42,7 +41,7 @@ public class TextFade : MonoBehaviour
     public IEnumerator FadeWordsRoutine()
     {
         const float fadeDuration = 0.4f;
-        const float cycle = 3f;
+        const float cycle = 5f; // total time for one fade in + fade out cycle
         float hold = cycle * 0.4f;
 
         while (true)
@@ -66,11 +65,14 @@ public class TextFade : MonoBehaviour
         ApplyFadeAlphaToMesh();
     }
 
+    //applies currentFadeAlpha to characters that should fade according to markers
     public void ApplyFadeAlphaToMesh()
     {
         if (wordOutput == null || wordBank == null) return;
 
         wordOutput.ForceMeshUpdate();
+        
+        //actual characters of the text
         TMPro.TMP_TextInfo textInfo = wordOutput.textInfo;
 
         if (textInfo.characterCount == 0) return;
@@ -80,25 +82,28 @@ public class TextFade : MonoBehaviour
         int wordIndex = 0;
         bool inWord = false;
 
+
+        //check for every character
         for (int i = 0; i < textInfo.characterCount; i++)
         {
             TMPro.TMP_CharacterInfo charInfo = textInfo.characterInfo[i];
 
+            //increment word index based on invisible chars
             if (!charInfo.isVisible)
             {
-                //spaces and other invisible chars, use them as word separators
                 if (inWord)
                 {
                     wordIndex++;
                     inWord = false;
                 }
-                continue;
+                continue; //skip fading invisible characters
             }
 
-            inWord = true;
+            inWord = true; 
 
-            if (!wordBank.DoesWordFade(wordIndex)) continue;
-
+            if (!wordBank.DoesWordFade(wordIndex)) continue; //check if word is marked for fading
+            
+            //apply fading
             int matIndex = charInfo.materialReferenceIndex;
             int vertIndex = charInfo.vertexIndex;
 

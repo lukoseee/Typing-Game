@@ -7,20 +7,21 @@ using UnityEngine;
 //manages the sentences and words for each level
 public class WordBank : MonoBehaviour
 {   
-    private List<string> workingSentences = new List<string>();
-    private bool[] currentMask;
-    private bool[] currentFadeMask; 
+    private List<string> workingSentences = new List<string>(); //all sentences for a level
+    private bool[] currentMask; //list for which letters are masked in current sentence (for level 8)
+    private bool[] currentFadeMask;  //list for which words fade in current sentence (for level 9)
 
-
-    public void setWords(string[] newSentences)
+    //upload new sentences for a level
+    public void SetSentences(string[] newSentences)
     {   
         workingSentences.Clear();
         workingSentences.AddRange(newSentences);
         currentMask = null;
         currentFadeMask = null;
     }
-
-    public string getWord(){
+    
+    //return next sentence and remove it from list
+    public string SetSentence(){
 
         string newWord = string.Empty;
 

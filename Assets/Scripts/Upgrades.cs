@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-//ui and logic for upgrades
+//Singleton for ui and logic for upgrades
 public class Upgrades : MonoBehaviour
 {   
     public static Upgrades Instance { get; private set; }
@@ -22,11 +22,11 @@ public class Upgrades : MonoBehaviour
         { PowerupType.GuidingLight, new int[] { 3, 0, 0 } } 
     };
 
-    private Dictionary<PowerupType, int> powerupLevels = new Dictionary<PowerupType, int>();
+    private Dictionary<PowerupType, int> powerupLevels = new Dictionary<PowerupType, int>(); //track current level of each powerup (0 if not purchased, 1-3 for upgrades)
     private HashSet<PowerupType> purchasedPowerups = new HashSet<PowerupType>(); //track which powerups bought
     private int maxEquipped = 2;
-    private PowerupType[] equippedPowerups = new PowerupType[2];
-    private Dictionary<PowerupType, bool> isEquipped = new Dictionary<PowerupType, bool>();
+    private PowerupType[] equippedPowerups = new PowerupType[2]; //track which powerups currently equipped in each slot
+    private Dictionary<PowerupType, bool> isEquipped = new Dictionary<PowerupType, bool>(); //track which powerups currently equipped
 
     private void Awake()
     {
@@ -35,6 +35,8 @@ public class Upgrades : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+        //set singleton
         Instance = this;
 
         if (root != null)

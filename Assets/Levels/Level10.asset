@@ -19,7 +19,7 @@ MonoBehaviour:
   - and bound him for a thousand years,
   - and threw him into the pit,
   - and shut it and sealed it over him.
-  timeLimit: 4
+  timeLimit: 3
   message: Level 10 - Fading Scripture
   backgroundMusic: {fileID: 8300000, guid: cd2ae6c0c073a49429fedb18cb4c83a5, type: 3}
   ranksThresholds:
@@ -27,8 +27,8 @@ MonoBehaviour:
   - 55
   - 65
   graceEarned: 5
-  baseGraceAwarded: 0
-  highestRankAwarded: 0
+  baseGraceAwarded: 1
+  highestRankAwarded: 1
   visualChallenge: 3
   maskMarker: 42
   fadeWordMarker: 126

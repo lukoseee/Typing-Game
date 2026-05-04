@@ -60,11 +60,12 @@ public class Powerup : MonoBehaviour
         bool isUpgradable = Upgrades.Instance.IsUpgradable(powerupType);
 
         if (currentLevel == 0 || (!isUpgradable && isPurchased))
-        {
+        {   
+            //non upgradable
             levelText.text = "";
         }
         else
-        {
+        {   //dispplay level for upgradable
             levelText.text = $"LVL: {currentLevel}/3";
         }
 
@@ -72,10 +73,11 @@ public class Powerup : MonoBehaviour
         {
             buyButton.gameObject.SetActive(true);
             costText.text = "MAX";
+            // disable buy button if maxed out
             buyButton.interactable = false;
         }
         else
-        {
+        {   //if upgradable and not maxed, show cost and enable buy button if affordable
             buyButton.gameObject.SetActive(true);
             int nextLevel = currentLevel + 1;
             int cost = Upgrades.Instance.GetPowerupCost(powerupType, nextLevel);
@@ -83,6 +85,7 @@ public class Powerup : MonoBehaviour
             buyButton.interactable = graceAmount >= cost;
         }
 
+        // equip button is interactable if purchased
         equipButton.gameObject.SetActive(isPurchased);
     }
     

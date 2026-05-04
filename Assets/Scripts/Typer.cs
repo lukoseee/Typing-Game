@@ -7,9 +7,11 @@ using TMPro;
 
 //all logic related to player typing 
 public class Typer : MonoBehaviour
-{  
+{   
+    //text shake settings
     [SerializeField] private float shakeDuration = 0.2f;
     [SerializeField] private float shakeMagnitude = 5f;
+
     [SerializeField] private TMP_Text wordOutput = null;
     [SerializeField] private Color typedColor = Color.green;
     [SerializeField] private GameController gameController = null;
@@ -49,15 +51,18 @@ public class Typer : MonoBehaviour
 
     private void updateDisplay()
     {   
-
+        //split typed and remaining parts of the sentence
         string typed = currentSentence.Substring(0, typedCount);
         string remaining = currentSentence.Substring(typedCount);
 
+        //red if failed, green otherwise
         Color displayTypedColor = gameController.getFailed() ? failedColor : typedColor;
 
+        //
         string typedHex = ColorUtility.ToHtmlStringRGB(displayTypedColor);
         string remainingHex = ColorUtility.ToHtmlStringRGB(remainingColor);
 
+        //check if player has visual power-ups
         bool hasInkOfConviction = Upgrades.Instance.IsPowerupEquipped(PowerupType.InkOfConviction);
         bool hasGuidingLight = Upgrades.Instance.IsPowerupEquipped(PowerupType.GuidingLight);
 
@@ -87,7 +92,7 @@ public class Typer : MonoBehaviour
             string nextLetter = remaining[0].ToString();
             string restRemaining = remaining.Substring(1);
 
-            //apply masking to the next letter (typedCount is its index in currentSentence)
+            //apply masking to the next letter (for level 8)
             if (wordBank != null && wordBank.IsMaskedAt(typedCount))
             {
                 nextLetter = "_";
@@ -125,7 +130,7 @@ public class Typer : MonoBehaviour
         }
 
         wordOutput.text = displayText;
-
+        
         gameController.ReapplyFadeIfActive();
     }
 
@@ -152,8 +157,11 @@ public class Typer : MonoBehaviour
 
         string keyPressed = Input.inputString;
         stopwatch.StartTimer();
+
+        //only consider single character inputs         
         if (keyPressed.Length == 1)
-        {
+        {   
+            //check letter input
             enterLetter(keyPressed);
         }
 
@@ -181,9 +189,11 @@ public class Typer : MonoBehaviour
             typedCount++;
             correctCharCount++;
             if(isWordComplete()){
+                //reset timer on word completion
                 timerBar.ResetTimer();
+
                 boy.MoveToCandle(gameController.getCurrentCandleIndex());
-                audioPlayer.litSFX();
+                audioPlayer.litSFX() //success sfx
                 Debug.Log("boy moving to candle index: " + gameController.getCurrentCandleIndex());
 
                 //move to next candle 
@@ -213,12 +223,15 @@ public class Typer : MonoBehaviour
             {
                 Debug.Log("Mistake ignored!");
                 audioPlayer.failSFX();
+
                 //powerup icon popup
                 PowerupPopup.Spawn(popupPrefab, popupParent, "ForgivingFlame");
                 updateDisplay();
                 return;
             }
             ResetFirstKeyPress();  
+
+            //notify game controller of fail
             gameController.setFailed();
             StartCoroutine(ShakeText());
             updateDisplay();
@@ -227,6 +240,7 @@ public class Typer : MonoBehaviour
 
 
     private bool isCorrectLetter(string letter){
+        //check against the current letter in the sentence 
         return currentSentence[typedCount].ToString() == letter;
     }
 

@@ -9,7 +9,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private Typer typer = null;
     [SerializeField] private WordBank wordBank = null;
     [SerializeField] private TimerBar timerBar = null;
-    [SerializeField] private List<LevelData> levels = new List<LevelData>();
+    [SerializeField] private List<LevelData> levels = new List<LevelData>(); //list of levels
     [SerializeField] private Text levelDisplay = null;
     [SerializeField] private CandleController candleController = null;
     [SerializeField] private Desk desk = null;
@@ -25,13 +25,12 @@ public class GameController : MonoBehaviour
     private bool isBlowingOut = false;
     private bool hasFailed = false;
     private int currentLevelIndex = 0;
-    private int currentCandleIndex = 0;
+    private int currentCandleIndex = 0; //which candle to light
     private bool hasFailedAlready = false;
     private int mistakesRemaining = 0;
     private int sacredPauses = 0;
 
     private Coroutine fadeCoroutine;
-    private RectTransform textRectTransform;
     private Coroutine fadeWordsCoroutine;
 
     private void StartLevel(int index ){
@@ -68,7 +67,7 @@ public class GameController : MonoBehaviour
         typer.resetCharCount();
         boy.ResetPosition();
 
-        wordBank.setWords(level.sentences);
+        wordBank.SetSentences(level.sentences);
         currentCandleIndex = 0;
 
         candleController.SpawnCandles(wordBank.wordCount());
@@ -98,7 +97,7 @@ public class GameController : MonoBehaviour
     }
 
     private void StartMessageFadeIn(string message)
-    {
+    {   //message at the start of level
         restartMessage.SetMessage(message);
         restartMessage.StartFadeInAndOut();
     }
@@ -131,8 +130,7 @@ public class GameController : MonoBehaviour
             level.ResetForNewGame();
         }
 
-        textRectTransform = wordOutput.GetComponent<RectTransform>();
-        currentLevelIndex = 9;
+        currentLevelIndex = 8;
         
         StartLevel(currentLevelIndex);
         audioPlayer.PlayMusic(levels[currentLevelIndex]);
@@ -160,7 +158,8 @@ public class GameController : MonoBehaviour
 
     private void ApplySacredPause(){
         if (Upgrades.Instance.IsPowerupEquipped(PowerupType.SacredPause))
-        {
+        {   
+            //store no of usages
             sacredPauses = Upgrades.Instance.GetPowerupLevel(PowerupType.SacredPause);
         }
     }
@@ -198,9 +197,10 @@ public class GameController : MonoBehaviour
             endLevelPopup.ShowWin();
             return;
         }
-        string sentence = wordBank.getWord();
+        string sentence = wordBank.SetSentence();
 
         LevelData level = getCurrentLevelData();
+
         //apply visual challenge parsing based on level
         if (level.visualChallenge == VisualChallenge.MissingLetters)
         {

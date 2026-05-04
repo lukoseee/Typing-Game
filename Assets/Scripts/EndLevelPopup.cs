@@ -36,6 +36,7 @@ public class EndLevelPopup : MonoBehaviour
     [SerializeField] private GameController gameController;
     [SerializeField] private Typer typer;
     
+    //threshold text component on popup
     [SerializeField] private Text bronzeThreshold;
     [SerializeField] private Text silverThreshold;
     [SerializeField] private Text goldThreshold;
@@ -43,6 +44,8 @@ public class EndLevelPopup : MonoBehaviour
     [SerializeField] private Button upgradesButton;
     [SerializeField] private Upgrades upgrades;
     [SerializeField] private Text graceEarned;
+
+    private float wpmScore;
 
     private void Awake()
     {
@@ -74,7 +77,7 @@ public class EndLevelPopup : MonoBehaviour
         completeText.color = Color.green;
         completeText.text = "Complete!";
 
-        float wpmScore = CalculateWPM(typer.getCorrectCharCount(), gameController.stopwatch.GetTime());
+        //only show rank on win
         Rank rank = GetRank(wpmScore);
         DisplayRank(rank);
 
@@ -89,10 +92,11 @@ public class EndLevelPopup : MonoBehaviour
             levelData.SetBaseGraceAwarded();
         }
         else
-        {
+        {   // on retry after earning grace, base grace is not awarded again, so indicate that with +0.
             graceEarned.text = "+0";
         }
         
+        // check if new rank is higher than previously awarded rank for this level, and if so, grant bonus grace for new rank
         if (rank > levelData.GetHighestRankAwarded())
         {
             int bonusGrace = GetBonusForRank(rank);
@@ -128,8 +132,12 @@ public class EndLevelPopup : MonoBehaviour
         root.SetActive(true);
         level.text = $"Level {gameController.getCurrentLevel()}";
         timer.text = gameController.stopwatch.GetTime().ToString("F2");
-        float wpmScore = CalculateWPM(typer.getCorrectCharCount(), gameController.stopwatch.GetTime());
+
+        //calculate wpm on fail and success
+        wpmScore = CalculateWPM(typer.getCorrectCharCount(), gameController.stopwatch.GetTime());
         WPM.text = wpmScore.ToString("F2"); //2 decimal places
+
+        //display thresholds for each rank for that level
         bronzeThreshold.text = $"{gameController.getCurrentLevelData().ranksThresholds[0]} WPM";
         silverThreshold.text = $"{gameController.getCurrentLevelData().ranksThresholds[1]} WPM";
         goldThreshold.text = $"{gameController.getCurrentLevelData().ranksThresholds[2]} WPM";
@@ -151,6 +159,7 @@ public class EndLevelPopup : MonoBehaviour
     private void OnNextClicked()
     {   
         Debug.Log("Loading next level...");
+        //hide itself
         Hide();
         gameController.NextLevel();
     }

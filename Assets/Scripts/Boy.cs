@@ -50,6 +50,7 @@ public class Boy : MonoBehaviour
             moveSpeed * Time.deltaTime
         );
 
+        //stop when close enough
         if (Mathf.Abs(transform.position.x - targetPosition.x) < 0.05f)
         {
             isMoving = false;

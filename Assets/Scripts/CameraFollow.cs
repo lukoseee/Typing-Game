@@ -15,6 +15,7 @@ public class CameraFollow : MonoBehaviour
         initialPosition = transform.position;
     }
 
+    //late update to ensure camera moves after player has moved in update
     void LateUpdate(){
         
         //sling camera back to start
@@ -42,6 +43,7 @@ public class CameraFollow : MonoBehaviour
         isFrozen = true;
     }
     
+    //on reset or level complete, snap camera back to initial position (even if in midde of rewind)
     public void ResetPosition()
     {   
         isRewinding = false;
