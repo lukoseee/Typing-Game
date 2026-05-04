@@ -90,13 +90,17 @@ public class GameController : MonoBehaviour
         levelDisplay.text = $"{index + 1}";
 
         //level message fades in
-        restartMessage.SetMessage(level.message);
-        restartMessage.StartFadeInAndOut();
-
+        StartMessageFadeIn(level.message);
 
         desk.ResizeDesk(wordBank.wordCount(), candleController.GetSpacing());
         mainCamera.ResetPosition();
         typer.ResetFirstKeyPress();
+    }
+
+    private void StartMessageFadeIn(string message)
+    {
+        restartMessage.SetMessage(message);
+        restartMessage.StartFadeInAndOut();
     }
 
     public void NextLevel(){
@@ -128,7 +132,8 @@ public class GameController : MonoBehaviour
         }
 
         textRectTransform = wordOutput.GetComponent<RectTransform>();
-        currentLevelIndex = 0;
+        currentLevelIndex = 9;
+        
         StartLevel(currentLevelIndex);
         audioPlayer.PlayMusic(levels[currentLevelIndex]);
         loadNextSentence();

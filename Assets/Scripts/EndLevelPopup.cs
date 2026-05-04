@@ -75,7 +75,6 @@ public class EndLevelPopup : MonoBehaviour
         completeText.text = "Complete!";
 
         float wpmScore = CalculateWPM(typer.getCorrectCharCount(), gameController.stopwatch.GetTime());
-        WPM.text = wpmScore.ToString("F2"); //2 decimal places
         Rank rank = GetRank(wpmScore);
         DisplayRank(rank);
 
@@ -129,6 +128,8 @@ public class EndLevelPopup : MonoBehaviour
         root.SetActive(true);
         level.text = $"Level {gameController.getCurrentLevel()}";
         timer.text = gameController.stopwatch.GetTime().ToString("F2");
+        float wpmScore = CalculateWPM(typer.getCorrectCharCount(), gameController.stopwatch.GetTime());
+        WPM.text = wpmScore.ToString("F2"); //2 decimal places
         bronzeThreshold.text = $"{gameController.getCurrentLevelData().ranksThresholds[0]} WPM";
         silverThreshold.text = $"{gameController.getCurrentLevelData().ranksThresholds[1]} WPM";
         goldThreshold.text = $"{gameController.getCurrentLevelData().ranksThresholds[2]} WPM";

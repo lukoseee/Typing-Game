@@ -45,34 +45,27 @@ public class PowerupPopup : MonoBehaviour
 
     private IEnumerator Animate()
     {
-        float elapsed = 0f;
         SetAlpha(0f);
         transform.localScale = Vector3.one * startScale;
 
-        // pop in
+        // pop in 
+        float elapsed = 0f;
         while (elapsed < popDuration)
         {
             float t = elapsed / popDuration;
-            t = 1f - Mathf.Pow(1f - t, 3f);
+            t = 1f - Mathf.Pow(1f - t, 3f); // ease-out cubic
             SetAlpha(t);
             transform.localScale = Vector3.one * Mathf.Lerp(startScale, peakScale, t);
             elapsed += Time.unscaledDeltaTime;
             yield return null;
         }
-
         SetAlpha(1f);
         transform.localScale = Vector3.one;
 
-        yield return new WaitForSecondsRealtime(holdDuration);
+        yield return new WaitForSeconds(holdDuration);
 
-        // fade out
-        elapsed = 0f;
-        while (elapsed < fadeDuration)
-        {
-            SetAlpha(1f - (elapsed / fadeDuration));
-            elapsed += Time.unscaledDeltaTime;
-            yield return null;
-        }
+        // fade out 
+        yield return FadeUtil.Lerp(1f, 0f, fadeDuration, SetAlpha);
 
         Destroy(gameObject);
     }

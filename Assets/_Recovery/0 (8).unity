@@ -331,7 +331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf2301a6b55d64bbf8b04529254fecf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  graceAmount: 30
+  graceAmount: 0
 --- !u!1 &58308308
 GameObject:
   m_ObjectHideFlags: 0
