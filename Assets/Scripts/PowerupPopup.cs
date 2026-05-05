@@ -62,7 +62,7 @@ public class PowerupPopup : MonoBehaviour
         SetAlpha(1f);
         transform.localScale = Vector3.one;
 
-        yield return new WaitForSeconds(holdDuration);
+        yield return new WaitForSecondsRealtime(holdDuration);
 
         // fade out 
         yield return FadeUtil.Lerp(1f, 0f, fadeDuration, SetAlpha);

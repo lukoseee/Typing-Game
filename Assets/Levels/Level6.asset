@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Level6
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   sentences:
-  - Proclaim ye this among the Gentiles;
-  - Prepare war, wake up the mighty men,
-  - 'let all the men of war draw near:'
+  - 'Proclaim ye this among the Gentiles; '
+  - 'Prepare war, wake up the mighty men, '
+  - 'let all the men of war draw near: '
   - let them come up.
   timeLimit: 4.5
   message: Level 6 - Punctuation

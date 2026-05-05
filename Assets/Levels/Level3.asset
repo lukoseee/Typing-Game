@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Level3
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   sentences:
-  - for hardship does not spring from the soil
-  - nor does trouble sprout from the ground
+  - 'for hardship does not spring from the soil '
+  - 'nor does trouble sprout from the ground '
   - yet man is born to trouble
   timeLimit: 3.5
   message: level 3 - Getting Faster
@@ -24,8 +24,8 @@ MonoBehaviour:
   - 55
   - 65
   graceEarned: 2
-  baseGraceAwarded: 0
-  highestRankAwarded: 0
+  baseGraceAwarded: 1
+  highestRankAwarded: 2
   visualChallenge: 0
   maskMarker: 42
   fadeWordMarker: 126

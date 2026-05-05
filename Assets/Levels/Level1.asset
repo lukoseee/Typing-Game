@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Level1
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   sentences:
-  - in the beginning
-  - god created the
+  - 'in the beginning '
+  - 'god created the '
   - heavens and the earth
   timeLimit: 10
   message: 'Level 1 - Starting Easy '
@@ -25,4 +25,7 @@ MonoBehaviour:
   - 70
   graceEarned: 1
   baseGraceAwarded: 1
-  highestRankAwarded: 1
+  highestRankAwarded: 0
+  visualChallenge: 0
+  maskMarker: 42
+  fadeWordMarker: 126

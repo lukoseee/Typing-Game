@@ -193,7 +193,7 @@ public class Typer : MonoBehaviour
                 timerBar.ResetTimer();
 
                 boy.MoveToCandle(gameController.getCurrentCandleIndex());
-                audioPlayer.litSFX() //success sfx
+                audioPlayer.litSFX(); //success sfx
                 Debug.Log("boy moving to candle index: " + gameController.getCurrentCandleIndex());
 
                 //move to next candle 

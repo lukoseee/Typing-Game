@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Level7
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   sentences:
-  - '''Get out of here, baldy!'' they said. ''Get out of here, baldy!'''
-  - He turned around,
+  - '''Get out of here, baldy!'' they said. ''Get out of here, baldy!'' '
+  - 'He turned around, '
   - and cursed them in the name of the LORD.
   timeLimit: 4
   message: 'Level 7 - Combinations '

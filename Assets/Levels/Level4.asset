@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Level4
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   sentences:
-  - for our wrestling is not against flesh and blood
-  - but against principalities and power
+  - 'for our wrestling is not against flesh and blood '
+  - 'but against principalities and power '
   - against the rulers of the world of this darkness
   timeLimit: 4.5
   message: level 4 - Longer and Faster

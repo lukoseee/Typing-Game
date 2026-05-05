@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Level2
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   sentences:
-  - he makes me lie down in green pastures
-  - he leads me beside still waters
+  - 'he makes me lie down in green pastures '
+  - 'he leads me beside still waters '
   - he restores my soul
   timeLimit: 5
   message: Level 2 - A Bit Longer
@@ -25,4 +25,7 @@ MonoBehaviour:
   - 70
   graceEarned: 2
   baseGraceAwarded: 1
-  highestRankAwarded: 1
+  highestRankAwarded: 0
+  visualChallenge: 0
+  maskMarker: 42
+  fadeWordMarker: 126

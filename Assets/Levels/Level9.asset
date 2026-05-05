@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Level9
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   sentences:
-  - Praise ~be to the ~LORD my Rock,
-  - who ~trains my hands for ~war,
-  - Send forth ~lightning and ~scatter the enemies;
+  - 'Praise ~be to the ~LORD my Rock, '
+  - 'who ~trains my hands for ~war, '
+  - 'Send forth ~lightning and ~scatter the enemies; '
   - shoot ~your ~arrows and rout them.
   timeLimit: 3
   message: Level 9 - Fading Words
@@ -25,7 +25,7 @@ MonoBehaviour:
   - 55
   - 60
   graceEarned: 4
-  baseGraceAwarded: 0
+  baseGraceAwarded: 1
   highestRankAwarded: 0
   visualChallenge: 2
   maskMarker: 42

@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: Level10
   m_EditorClassIdentifier: Assembly-CSharp::LevelData
   sentences:
-  - Then I saw an angel coming down from heaven,
-  - holding in his hand the key to the bottomless pit
-  - who is the devil and Satan,
-  - and bound him for a thousand years,
-  - and threw him into the pit,
+  - 'Then I saw an angel coming down from heaven, '
+  - 'holding in his hand the key to the bottomless pit '
+  - 'who is the devil and Satan, '
+  - 'and bound him for a thousand years, '
+  - 'and threw him into the pit, '
   - and shut it and sealed it over him.
   timeLimit: 3
   message: Level 10 - Fading Scripture
@@ -28,7 +28,7 @@ MonoBehaviour:
   - 65
   graceEarned: 5
   baseGraceAwarded: 1
-  highestRankAwarded: 1
+  highestRankAwarded: 0
   visualChallenge: 3
   maskMarker: 42
   fadeWordMarker: 126

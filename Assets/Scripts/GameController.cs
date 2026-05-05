@@ -130,7 +130,7 @@ public class GameController : MonoBehaviour
             level.ResetForNewGame();
         }
 
-        currentLevelIndex = 8;
+        currentLevelIndex = 0;
         
         StartLevel(currentLevelIndex);
         audioPlayer.PlayMusic(levels[currentLevelIndex]);
