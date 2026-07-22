@@ -159,7 +159,7 @@ public class EndLevelPopup : MonoBehaviour
     private void OnNextClicked()
     {   
         Debug.Log("Loading next level...");
-        //hide itself
+        //hide itself so commit 
         Hide();
         gameController.NextLevel();
     }
